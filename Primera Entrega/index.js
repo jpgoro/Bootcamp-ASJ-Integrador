@@ -120,7 +120,7 @@ if (productosGuardados.length > 0) {
     });
 }
 
-// Muestra las tarjetas de órdenes si hay órdenes guardadas
+// Muestra las tarjetas de órdenes si hay órdenes de compra guardadas
 if (ordenesGuardadas.length > 0) {
     ordenesGuardadas.forEach(function (orden, index) {
         generarNuevaTarjetaOrden(orden, index);
