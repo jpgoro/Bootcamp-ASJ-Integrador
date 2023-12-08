@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRINCIPAL</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container bg-light">
+        <div class="row">
+            <div class="col">
+              <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="/index.html">SGC</a>
+                  <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/formularios/proveedor.html"
+                          >PROVEEDOR</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/formularios/producto.html"
+                          >PRODUCTO</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/formularios/orden.html"
+                          >ORDEN DE COMPRA</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+        <div class="row">
+            <div class="col border-black " id="cartas">
+              <div><nav class="navbar navbar-light bg-transparent">
+                <div class="container-fluid">
+                  <span class="navbar-text">
+                    <h2>PROVEEDORES</h2>
+                  </span>
+                </div>
+              </nav></div>                
+            </div>
+            <div class="col border-black" id="tarjetas"">
+              <div><nav class="navbar navbar-light bg-transparent">
+                <div class="container-fluid ">
+                  <span class="navbar-text">
+                    <h2>PRODUCTOS</h2>
+                  </span>
+                </div>
+              </nav></div>
+            </div>
+            <div class="col border-black" id="tarjetas2">
+              <div><nav class="navbar navbar-light bg-transparent">
+                <div class="container-fluid">
+                  <span class="navbar-text">
+                    <h2>ORDENES DE COMPRA</h2>
+                  </span>
+                </div>
+              </nav></div>
+            </div>
+        </div>
+    </div>
+    <script src="/index.js">
+/*
+            // Obtengo los datos del localStorage para proveedores
+        let proveedoresGuardados = JSON.parse(localStorage.getItem("proveedores")) || [];
+
+// Obtengo los datos del localStorage para productos
+let productosGuardados = JSON.parse(localStorage.getItem("productos")) || [];
+
+// Obtengo los datos del localStorage para órdenes
+let ordenesGuardadas = JSON.parse(localStorage.getItem("ordenes")) || [];
+
+// Función para generar una nueva tarjeta de proveedor
+function generarNuevaTarjetaProveedor(proveedor, index) {
+  let cartasContainer = document.getElementById("cartas");
+
+  let nuevaTarjeta = document.createElement("div");
+    nuevaTarjeta.className = "card mb-3";
+    nuevaTarjeta.innerHTML = `
+        <div class="card-body">
+            <p>Código: ${proveedor.codigo}</p>
+            <p>Razón Social: ${proveedor.razon}</p>
+            <p>Rubro: ${proveedor.rubro}</p>
+            <p>Web: ${proveedor.web}</p>
+            <p>Dirección: ${proveedor.direccion}</p>
+            <p>Datos Fiscales: ${proveedor.fiscales}</p>
+            <p>Datos de contacto: ${proveedor.datosContacto}</p>
+            <button class="btn btn-danger" onclick="eliminarTarjetaProveedor(${index})">Eliminar</button>
+        </div>
+    `;
+
+    cartasContainer.appendChild(nuevaTarjeta);
+}
+
+// Función para generar una nueva tarjeta de producto
+function generarNuevaTarjetaProducto(producto, index) {
+  let tarjetasContainer = document.getElementById("tarjetas");
+
+  let nuevaTarjeta = document.createElement("div");
+    nuevaTarjeta.className = "card mb-3";
+    nuevaTarjeta.innerHTML = `
+        <div class="card-body">
+            <p>Proveedor: ${producto.proveedor}</p>
+            <p>Código/SKU: ${producto.sku}</p>
+            <p>Categoría: ${producto.categoria}</p>
+            <p>Nombre del Producto: ${producto.nombre}</p>
+            <p>Descripción: ${producto.descripcion}</p>
+            <p>Precio: ${producto.precio}</p>
+            <button class="btn btn-danger" onclick="eliminarTarjetaProducto(${index})">Eliminar</button>
+        </div>
+    `;
+
+    tarjetasContainer.appendChild(nuevaTarjeta);
+}
+
+// Función para generar una nueva tarjeta de orden
+function generarNuevaTarjetaOrden(orden, index) {
+  let tarjetasContainer = document.getElementById("tarjetas2");
+
+    let nuevaTarjeta = document.createElement("div");
+    nuevaTarjeta.className = "card mb-3";
+    nuevaTarjeta.innerHTML = `
+        <div class="card-body">
+            <p>Número de Orden: ${orden.numero}</p>
+            <p>Fecha de Emisión: ${orden.emision}</p>
+            <p>Fecha de Entrega Esperada: ${orden.entrega}</p>
+            <p>Dirección de Recepción: ${orden.recepcion}</p>
+            <p>Proveedor: ${orden.proveedor2}</p>
+            <p>Producto: ${orden.producto2}</p>
+            <p>Cantidad: ${orden.cantidad}</p>
+            <p>Total: ${orden.total}</p>
+            <button class="btn btn-danger" onclick="eliminarTarjetaOrden(${index})">Eliminar</button>
+        </div>
+    `;
+
+    tarjetasContainer.appendChild(nuevaTarjeta);
+}
+
+// Función para eliminar una tarjeta de proveedor
+function eliminarTarjetaProveedor(index) {
+    proveedoresGuardados.splice(index, 1);
+    localStorage.setItem("proveedores", JSON.stringify(proveedoresGuardados));
+    let cartasContainer = document.getElementById("cartas");
+    cartasContainer.innerHTML = "";
+    proveedoresGuardados.forEach(function (proveedor, index) {
+        generarNuevaTarjetaProveedor(proveedor, index);
+    });
+}
+
+// Función para eliminar una tarjeta de producto
+function eliminarTarjetaProducto(index) {
+    productosGuardados.splice(index, 1);
+    localStorage.setItem("productos", JSON.stringify(productosGuardados));
+    let tarjetasContainer = document.getElementById("tarjetas");
+    tarjetasContainer.innerHTML = "";
+    productosGuardados.forEach(function (producto, index) {
+        generarNuevaTarjetaProducto(producto, index);
+    });
+}
+
+// Función para eliminar una tarjeta de orden
+function eliminarTarjetaOrden(index) {
+    ordenesGuardadas.splice(index, 1);
+    localStorage.setItem("ordenes", JSON.stringify(ordenesGuardadas));
+    let tarjetasContainer = document.getElementById("tarjetas2");
+    tarjetasContainer.innerHTML = "";
+    ordenesGuardadas.forEach(function (orden, index) {
+        generarNuevaTarjetaOrden(orden, index);
+    });
+}
+
+// Muestra las tarjetas de proveedores si hay proveedores guardados
+if (proveedoresGuardados.length > 0) {
+    proveedoresGuardados.forEach(function (proveedor, index) {
+        generarNuevaTarjetaProveedor(proveedor, index);
+    });
+}
+
+// Muestra las tarjetas de productos si hay productos guardados
+if (productosGuardados.length > 0) {
+    productosGuardados.forEach(function (producto, index) {
+        generarNuevaTarjetaProducto(producto, index);
+    });
+}
+
+// Muestra las tarjetas de órdenes si hay órdenes guardadas
+if (ordenesGuardadas.length > 0) {
+    ordenesGuardadas.forEach(function (orden, index) {
+        generarNuevaTarjetaOrden(orden, index);
+    });
+}*/
+
+
+    </script>
+    
+</body>
+</html>
