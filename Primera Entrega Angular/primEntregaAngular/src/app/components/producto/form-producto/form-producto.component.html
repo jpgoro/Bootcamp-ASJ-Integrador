@@ -1,0 +1,111 @@
+<div class="container " style="background-color: #e2d5de;">
+  <!-- <div class="row">
+    <div class="col">
+      <nav class="navbar navbar-expand-lg " style="background-color: #e2d5de;">
+        <div class="container">
+          <a class="navbar-brand" href="/index.html">SGC</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/formularios/proveedor.html"
+                  >PROVEEDOR</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/formularios/producto.html"
+                  >PRODUCTO</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/formularios/orden.html"
+                  >ORDEN DE COMPRA</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div> -->
+  <div class="row" id="contenidos">
+    <div class="col mt-5">
+      <form>
+        <fieldset>
+          <legend class="mb-xl-5">CARGUE UN PRODUCTO</legend>
+          <div class="mb-3">
+            <label for="provedoor" class="form-label">ELIJA UN PROVEEDOR</label>
+            <select id="proveedor" class="form-select">
+              <option>EMPRESA 1</option>
+              <option>EMPRESA 2</option>
+              <option>EMPRESA 3</option>
+              <option>EMPRESA 4</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label"
+              >CODIGO / SKU</label
+            >
+            <input type="text" id="sku" class="form-control" placeholder="" />
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">CATEGORIA</label>
+            <input
+              type="text"
+              id="categoria"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label"
+              >NOMBRE DEL PRODUCTO</label
+            >
+            <input
+              type="text"
+              id="nombre"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label"
+              >DESCRIPCION</label
+            >
+            <input
+              type="text"
+              id="descripcion"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">PRECIO</label>
+            <input
+              type="text"
+              id="precio"
+              class="form-control"
+              placeholder=""
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="guardar">
+            GUARDAR
+          </button>
+          <button type="submit" class="btn btn-warning m-sm-5" id="editar">
+            EDITAR
+          </button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
