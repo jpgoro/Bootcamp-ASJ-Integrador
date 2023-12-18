@@ -10,17 +10,24 @@ import { FormOcComponent } from './components/oc/form-oc/form-oc.component';
 import { TarjOcComponent } from './components/oc/tarj-oc/tarj-oc.component';
 
 const routes: Routes = [
-  {path:'', component:MainComponent},
-  {path:'proveedor', component:FormProveedorComponent},
-  {path: 'proveedor/tarjeta', component:TarjProveedorComponent},
-  {path: 'producto', component:FormProductoComponent },
-  {path: 'producto/tarjeta', component:TarjProductoComponent},
-  {path: 'oc', component:FormOcComponent},
-  {path: 'oc/tarjeta', component:TarjOcComponent},
+  { path: '', component: MainComponent },
+  { path: 'proveedor', component: TarjProveedorComponent },
+  {
+    path: 'proveedor',
+    children: [{ path: 'tabla', component: FormProveedorComponent }],
+  },
+  { path: 'producto', component: TarjProductoComponent },
+  {
+    path: 'producto',
+    children: [{ path: 'tabla', component: FormProductoComponent }],
+  },
+  { path: 'oc', component: TarjOcComponent },
+  { path: 'oc', children: [{ path: 'tabla', component: FormOcComponent }] },
+  {path: '**', pathMatch: 'full', redirectTo: ''},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

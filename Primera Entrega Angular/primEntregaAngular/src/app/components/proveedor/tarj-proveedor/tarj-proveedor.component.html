@@ -1,1 +1,31 @@
-<p>tarj-proveedor works!</p>
+<div class="container">
+  <section>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Razon Social</th>
+          <th scope="col">Rubro</th>
+          <th scope="col">Email</th>
+          <th scope="col">Direccion</th>
+          <th scope="col">Datos Fiscales</th>
+          <th scope="col">Datos de contacto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let proveedor of proveedores">
+          <td>{{ proveedor.id }}</td>
+          <td>{{ proveedor.razonSocial }}</td>
+          <td>{{ proveedor.rubro }}</td>
+          <td>{{ proveedor.email }}</td>
+          <td>{{ proveedor.direccion }}</td>
+          <td>{{ proveedor.datosFiscales }}</td>
+          <td>{{ proveedor.contacto }}</td>
+          <button type="button" class="btn btn-primary btn-sm bg-primary ms-2">Agregar</button>
+          <button type="button" class="btn btn-danger btn-sm bg-danger ms-2">Eliminar</button>
+          
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
