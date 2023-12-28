@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SgcService } from '../../../services/sgc.service';
 import { SgcProdService } from '../../../services/sgc-prod.service';
+import { Proveedor } from '../../../models/proveedor';
 
 @Component({
   selector: 'app-form-producto',
@@ -9,23 +10,28 @@ import { SgcProdService } from '../../../services/sgc-prod.service';
   styleUrl: './form-producto.component.css'
 })
 export class FormProductoComponent implements OnInit {
+  proveedores: Proveedor[] = [];
 
   constructor(public sgcProdService : SgcProdService, public sgcService : SgcService){}
 
   ngOnInit(): void {
     this.sgcService.getProveedores().subscribe((res)=>{
+      this.sgcService.getProveedores().subscribe((res)=>{
+        this.proveedores = res;
+      })
 
     })
   }
 
   createProducto(form:NgForm){
+    console.log(form.value)
     if(form.value.id !=-1){
-      /* this.sgcService.updateProducto(form.value).subscribe((res)=>{
+      this.sgcProdService.updateProducto(form.value).subscribe((res)=>{
         console.log(res);
         alert('Producto modificado correctamente');
       form.reset();
-      }) */
-      console.log("estas modificando");
+      })
+      
     }else{
     this.sgcProdService.createProd(form.value).subscribe((res) =>{
       console.log(res);

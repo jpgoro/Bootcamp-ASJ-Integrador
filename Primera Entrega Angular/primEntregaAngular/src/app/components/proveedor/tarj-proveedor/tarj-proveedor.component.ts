@@ -34,7 +34,7 @@ export class TarjProveedorComponent implements OnInit{
     datosF: prov.datosF,
     contacto: prov.contacto
   };
-
+ 
   }
   delete(id: number){
     let confirmacion = confirm("¿Desea eliminar el usuario # "+id+"?");

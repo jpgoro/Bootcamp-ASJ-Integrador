@@ -13,14 +13,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let product of productos">
-          <!-- <td>{{ product.proveedor }}</td> -->
+          <td>{{product.proveedor_razon}}</td>
           <td>{{ product.sku }}</td>
           <td>{{ product.categoria }}</td>
           <td>{{ product.nombreProducto }}</td>
           <td>{{ product.descripcion }}</td>
           <td>{{ product.precio }}</td>
-          <button type="button" class="btn btn-primary btn-sm bg-primary ms-2">Agregar</button>
-          <button type="button" class="btn btn-danger btn-sm bg-danger ms-2">Eliminar</button>
+          <button type="button" class="btn btn-outline-warning btn-sm  me-4" (click)="editarProducto(product)">Modificar</button>
+          <button type="button" class="btn btn-outline-danger btn-sm " (click)="delete(product.id)">Eliminar</button>
 
         </tr>
       </tbody>

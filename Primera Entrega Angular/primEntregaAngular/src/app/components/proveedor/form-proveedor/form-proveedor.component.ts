@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SgcService } from '../../../services/sgc.service';
 import { NgForm } from '@angular/forms';
 import { Proveedor } from '../../../models/proveedor';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-proveedor',
@@ -9,7 +10,7 @@ import { Proveedor } from '../../../models/proveedor';
   styleUrl: './form-proveedor.component.css'
 })
 export class FormProveedorComponent implements OnInit {
-  constructor(public sgcService: SgcService){}
+  constructor(public sgcService: SgcService, private router: Router){}
 
 
   ngOnInit(): void {

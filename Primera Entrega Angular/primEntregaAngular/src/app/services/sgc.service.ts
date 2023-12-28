@@ -24,22 +24,6 @@ export class SgcService {
     contacto: '',
   };
 
-  /* constructor() {
-    const storedProveedores = localStorage.getItem('proveedores');
-    if (storedProveedores) {
-      this.proveedores = JSON.parse(storedProveedores);
-    }
-  }
-
-  public createProv(proveedor: Proveedor): Observable<any> {
-    this.proveedores.push(proveedor);
-    localStorage.setItem('proveedores', JSON.stringify(this.proveedores));
-    return of({message:'Proovedor creado exitosamente'});
-  }
-
-  public getProovedores(): Observable<Proveedor[]> {
-    return of(this.proveedores);
-  } */
   constructor(){
     this.loadProveedoresFromLocalStorage();
   }
