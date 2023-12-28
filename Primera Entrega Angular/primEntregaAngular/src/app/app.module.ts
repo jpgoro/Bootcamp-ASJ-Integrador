@@ -12,6 +12,7 @@ import { FormOcComponent } from './components/oc/form-oc/form-oc.component';
 import { TarjProveedorComponent } from './components/proveedor/tarj-proveedor/tarj-proveedor.component';
 import { TarjProductoComponent } from './components/producto/tarj-producto/tarj-producto.component';
 import { TarjOcComponent } from './components/oc/tarj-oc/tarj-oc.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { TarjOcComponent } from './components/oc/tarj-oc/tarj-oc.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule, FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

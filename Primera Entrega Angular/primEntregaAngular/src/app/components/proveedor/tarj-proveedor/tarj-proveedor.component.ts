@@ -1,55 +1,48 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SgcService } from '../../../services/sgc.service';
+import { NgForm } from '@angular/forms';
+import { Proveedor } from '../../../models/proveedor';
 
 @Component({
   selector: 'app-tarj-proveedor',
   templateUrl: './tarj-proveedor.component.html',
   styleUrl: './tarj-proveedor.component.css',
 })
-export class TarjProveedorComponent {
-  id: string = '';
-  razonSocial: string = '';
-  rubro: string = '';
-  email: string = '';
-  direccion: string = '';
-  datosFiscales: string = '';
-  contacto: string = '';
+export class TarjProveedorComponent implements OnInit{
 
-  proveedores = [
-    {
-      id: 'pepe1',
-      razonSocial: 'fafasf',
-      rubro: 'fasdfas',
-      email: 'fasdfsa',
-      direccion: 'fasdfasdf',
-      datosFiscales: 'fsadfsa',
-      contacto: 'fasdfsdfsd'
-    },
-    {
-      id: 'pepe1',
-      razonSocial: 'fafasf',
-      rubro: 'fasdfas',
-      email: 'fasdfsa',
-      direccion: 'fasdfasdf',
-      datosFiscales: 'fsadfsa',
-      contacto: 'fasdfsdfsd'
-    },
-    {
-      id: 'pepe1',
-      razonSocial: 'fafasf',
-      rubro: 'fasdfas',
-      email: 'fasdfsa',
-      direccion: 'fasdfasdf',
-      datosFiscales: 'fsadfsa',
-      contacto: 'fasdfsdfsd'
-    },
-    {
-      id: 'pepe1',
-      razonSocial: 'fafasf',
-      rubro: 'fasdfas',
-      email: 'fasdfsa',
-      direccion: 'fasdfasdf',
-      datosFiscales: 'fsadfsa',
-      contacto: 'fasdfsdfsd'
-    },
-  ];
+  proveedores: Proveedor[] = [];
+  constructor(public sgcService : SgcService){}
+
+  ngOnInit(): void {
+    this.list();
+  }
+
+  list(){
+    this.sgcService.getProveedores().subscribe((res)=>{
+      this.proveedores = res;
+    })
+  }
+
+  editarProveedor(prov:Proveedor){
+  this.sgcService.datosProveedor={
+    id:prov.id,
+    codigo:prov.codigo,
+    razon: prov.razon,
+    rubro: prov.rubro,
+    email: prov.email,
+    direccion: prov.direccion,
+    datosF: prov.datosF,
+    contacto: prov.contacto
+  };
+
+  }
+  delete(id: number){
+    let confirmacion = confirm("¿Desea eliminar el usuario # "+id+"?");
+    if(confirmacion){
+      this.sgcService.deleteProveedor(id).subscribe((res)=>{
+        console.log("Eliminar")
+        this.list();
+      })
+    }
+  }
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Producto } from '../models/producto';
-import { Proveedor}from '../models/proveedor'  
+import { Proveedor}from '../models/proveedor'
 import { Observable, from, of } from 'rxjs';
-  
+
 
 
 @Injectable({
@@ -23,7 +23,7 @@ export class SgcProdService {
     precio: ''
   }
 
-  constructor() { 
+  constructor() {
     this.loadProductosFromLocalStorage();
   }
 
@@ -35,14 +35,14 @@ export class SgcProdService {
       const lastProducts = this.productos[this.productos.length - 1];
       this.lastId2 = lastProducts ? lastProducts.id : 0;
     }
-  } 
+  }
   public createProd(producto: Producto): Observable<any> {
     this.lastId2++;
     producto.id = this.lastId2;
       this.productos.push(producto);
       localStorage.setItem('productos', JSON.stringify(this.productos));
       return of({ message: 'Producto creado exitosamente' });
-    
+
     }
     public getPoductos(): Observable<Producto[]> {
       this.loadProductosFromLocalStorage();

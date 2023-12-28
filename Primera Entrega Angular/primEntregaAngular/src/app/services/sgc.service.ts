@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, from, of } from 'rxjs';
-import { Proveedor}from '../models/proveedor'  
+import { Proveedor}from '../models/proveedor'
 
 
 
@@ -9,13 +9,13 @@ import { Proveedor}from '../models/proveedor'
 })
 export class SgcService {
   proveedores: Proveedor[] = [];
-  
+
   private lastId: number = 0;
-  
+
 
   datosProveedor: Proveedor = {
     id:-1,
-    codigo:0,
+    codigo:'',
     razon: '',
     rubro: '',
     email: '',
@@ -23,8 +23,8 @@ export class SgcService {
     datosF: '',
     contacto: '',
   };
-  
-  /* constructor() { 
+
+  /* constructor() {
     const storedProveedores = localStorage.getItem('proveedores');
     if (storedProveedores) {
       this.proveedores = JSON.parse(storedProveedores);
@@ -52,7 +52,7 @@ export class SgcService {
       this.lastId = lastProvider ? lastProvider.id : 0;
     }
   }
-  
+
 
   public createProv(proveedor: Proveedor): Observable<any> {
     this.lastId++;
@@ -60,10 +60,10 @@ export class SgcService {
       this.proveedores.push(proveedor);
       localStorage.setItem('proveedores', JSON.stringify(this.proveedores));
       return of({ message: 'Proveedor creado exitosamente' });
-    
+
     }
 
-    
+
 
 
     public getProveedores(): Observable<Proveedor[]> {
@@ -71,8 +71,8 @@ export class SgcService {
       return of(this.proveedores);
     }
 
-    
-    
+
+
     public updateProveedor(proveedor: Proveedor): Observable<any> {
       const index = this.proveedores.findIndex((p) => p.id === proveedor.id);
       if (index !== -1) {
@@ -87,14 +87,14 @@ export class SgcService {
     public deleteProveedor(id: number): Observable<any> {
       // Filtrar el proveedor a eliminar
       const proveedorAEliminar = this.proveedores.find((p) => p.id === id);
-    
+
       if (proveedorAEliminar) {
         // Filtrar la lista para quitar el proveedor
         this.proveedores = this.proveedores.filter((p) => p.id !== id);
-    
+
         // Guardar la lista actualizada en el almacenamiento local
         localStorage.setItem('proveedores', JSON.stringify(this.proveedores));
-    
+
         // Puedes retornar algún mensaje o información útil
         return of({ message: 'Proveedor eliminado exitosamente' });
       } else {

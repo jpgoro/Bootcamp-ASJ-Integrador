@@ -1,10 +1,10 @@
-<div class="container">
-  <section>
+<div class="container-fluid">
+  <section >
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">id</th>
-          <th scope="col">Razon Social</th>
+          <th scope="col">Código</th>
+          <th scope="col">Razón Social</th>
           <th scope="col">Rubro</th>
           <th scope="col">Email</th>
           <th scope="col">Direccion</th>
@@ -14,16 +14,17 @@
       </thead>
       <tbody>
         <tr *ngFor="let proveedor of proveedores">
-          <td>{{ proveedor.id }}</td>
-          <td>{{ proveedor.razonSocial }}</td>
+          <td>{{ proveedor.codigo }}</td>
+          <td>{{ proveedor.razon }}</td>
           <td>{{ proveedor.rubro }}</td>
           <td>{{ proveedor.email }}</td>
           <td>{{ proveedor.direccion }}</td>
-          <td>{{ proveedor.datosFiscales }}</td>
+          <td>{{ proveedor.datosF }}</td>
           <td>{{ proveedor.contacto }}</td>
-          <button type="button" class="btn btn-primary btn-sm bg-primary ms-2">Agregar</button>
-          <button type="button" class="btn btn-danger btn-sm bg-danger ms-2">Eliminar</button>
-          
+
+          <button type="button" class="btn btn-outline-warning btn-sm  me-4" (click)="editarProveedor(proveedor)">Modificar</button>
+          <button type="button" class="btn btn-outline-danger btn-sm " (click)="delete(proveedor.id)">Eliminar</button>
+
         </tr>
       </tbody>
     </table>

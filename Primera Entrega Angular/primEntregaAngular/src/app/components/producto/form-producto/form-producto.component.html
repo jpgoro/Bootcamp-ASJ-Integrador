@@ -37,75 +37,78 @@
       </nav>
     </div>
   </div> -->
-  <div class="row" id="contenidos">
-    <div class="col mt-5">
-      <form>
-        <fieldset>
-          <legend class="mb-xl-5">CARGUE UN PRODUCTO</legend>
-          <div class="mb-3">
-            <label for="provedoor" class="form-label">ELIJA UN PROVEEDOR</label>
-            <select id="proveedor" class="form-select">
-              <option>EMPRESA 1</option>
-              <option>EMPRESA 2</option>
-              <option>EMPRESA 3</option>
-              <option>EMPRESA 4</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="disabledTextInput" class="form-label"
-              >CODIGO / SKU</label
-            >
-            <input type="text" id="sku" class="form-control" placeholder="" />
-          </div>
-          <div class="mb-3">
-            <label for="disabledTextInput" class="form-label">CATEGORIA</label>
-            <input
-              type="text"
-              id="categoria"
-              class="form-control"
-              placeholder=""
-            />
-          </div>
-          <div class="mb-3">
-            <label for="disabledTextInput" class="form-label"
-              >NOMBRE DEL PRODUCTO</label
-            >
-            <input
-              type="text"
-              id="nombre"
-              class="form-control"
-              placeholder=""
-            />
-          </div>
-          <div class="mb-3">
-            <label for="disabledTextInput" class="form-label"
-              >DESCRIPCION</label
-            >
-            <input
-              type="text"
-              id="descripcion"
-              class="form-control"
-              placeholder=""
-            />
-          </div>
-          <div class="mb-3">
-            <label for="disabledTextInput" class="form-label">PRECIO</label>
-            <input
-              type="text"
-              id="precio"
-              class="form-control"
-              placeholder=""
-            />
-          </div>
+  <div class="container " style="background-color: #e2d5de;">
 
-          <button type="submit" class="btn btn-primary" id="guardar">
-            GUARDAR
-          </button>
-          <button type="submit" class="btn btn-warning m-sm-5" id="editar">
-            EDITAR
-          </button>
-        </fieldset>
-      </form>
+    <div class="row" id="contenidos">
+      <div class="col mt-5">
+        <form #miForm1="ngForm" (ngSubmit)="createProducto(miForm1)" >
+          <fieldset>
+            <legend class="mb-xl-5">CARGUE UN PRODUCTO</legend>
+            <input type="hidden" name="id" [(ngModel)]="sgcProdService.datosProducto.id">
+            <input type="hidden" name="idProv" [(ngModel)]="sgcProdService.datosProducto.proveedor_id">
+            <input type="hidden" name="razon" [(ngModel)]="sgcProdService.datosProducto.proveedor_razon">
+            <div class="mb-3">
+              <label for="proveedor" class="form-label">ELIJA UN PROVEEDOR</label>
+              <!-- <select id="proveedor" class="form-select" name="proveedorId" [(ngModel)]="sgcService.datosProveedor.razon">
+                <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.razon }}</option>
+              </select> -->
+            </div>
+            <div class="mb-3">
+              <label for="disabledTextInput" class="form-label"
+                >CODIGO / SKU</label
+              >
+              <input type="text" id="sku" class="form-control" placeholder="" name="sku"  />
+            </div>
+            <div class="mb-3">
+              <label for="disabledTextInput" class="form-label">CATEGORIA</label>
+              <input
+                type="text"
+                id="categoria"
+                class="form-control"
+                placeholder=""
+                name="categoria"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="disabledTextInput" class="form-label"
+                >NOMBRE DEL PRODUCTO</label
+              >
+              <input
+                type="text"
+                id="nombre"
+                class="form-control"
+                placeholder=""
+                name="nombreProducto"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="disabledTextInput" class="form-label"
+                >DESCRIPCION</label
+              >
+              <input
+                type="text"
+                id="descripcion"
+                class="form-control"
+                placeholder=""
+                name="descripcion"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="disabledTextInput" class="form-label">PRECIO</label>
+              <input
+                type="text"
+                id="precio"
+                class="form-control"
+                placeholder=""
+                name="precio"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="guardar">
+              GUARDAR
+            </button>
+          </fieldset>
+        </form>
+      </div>
     </div>
   </div>
-</div>

@@ -1,6 +1,6 @@
 export interface Proveedor {
   id: number;
-  codigo: number;
+  codigo: string;
   razon: string;
   rubro: string;
   email: string;
