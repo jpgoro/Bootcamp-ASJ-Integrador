@@ -78,6 +78,7 @@ export class FormOcComponent implements OnInit {
         console.log(res);
         alert('Orden modificada correctamente');
       form.reset();
+      this.sgcOrdenService.datosOrden.id = -1;
       })
       console.log('modificando')
     }else{
@@ -85,6 +86,7 @@ export class FormOcComponent implements OnInit {
       console.log(res);
       alert('Orden creada correctamente');
       form.reset();
+      this.sgcOrdenService.datosOrden.id = -1;
       this.router
       .navigateByUrl('/oc', { skipLocationChange: true })
       .then(() => {

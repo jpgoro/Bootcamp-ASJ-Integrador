@@ -32,6 +32,7 @@ export class FormProductoComponent implements OnInit {
         console.log(res);
         alert('Producto modificado correctamente');
       form.reset();
+      this.sgcProdService.datosProducto.id = -1;
       // Recargar la página después de la operación
       this.router
       .navigateByUrl('/producto', { skipLocationChange: true })

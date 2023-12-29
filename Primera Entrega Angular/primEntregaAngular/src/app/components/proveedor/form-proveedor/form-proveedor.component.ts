@@ -21,6 +21,7 @@ export class FormProveedorComponent implements OnInit {
         console.log(res);
         alert('Proveedor modificado correctamente');
         form.reset();
+        this.sgcService.datosProveedor.id = -1;
         this.router
           .navigateByUrl('/proveedor', { skipLocationChange: true })
           .then(() => {
