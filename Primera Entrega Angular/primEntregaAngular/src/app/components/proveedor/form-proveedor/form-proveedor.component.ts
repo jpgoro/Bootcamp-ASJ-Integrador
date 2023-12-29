@@ -7,29 +7,38 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-form-proveedor',
   templateUrl: './form-proveedor.component.html',
-  styleUrl: './form-proveedor.component.css'
+  styleUrl: './form-proveedor.component.css',
 })
 export class FormProveedorComponent implements OnInit {
-  constructor(public sgcService: SgcService, private router: Router){}
+  constructor(public sgcService: SgcService, private router: Router) {}
 
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-  createProveedor(form:NgForm){
-    if(form.value.id !=-1){
-      this.sgcService.updateProveedor(form.value).subscribe((res)=>{
+  createProveedor(form: NgForm) {
+    if (form.value.id != -1) {
+      this.sgcService.updateProveedor(form.value).subscribe((res) => {
         console.log(res);
         alert('Proveedor modificado correctamente');
-      form.reset();
-      })
-    }else{
-    this.sgcService.createProv(form.value).subscribe((res) =>{
-      console.log(res);
-      alert('Proveedor creado correctamente');
-      form.reset();
-    })
+        form.reset();
+        this.router
+          .navigateByUrl('/proveedor', { skipLocationChange: true })
+          .then(() => {
+            this.router.navigate(['/proveedor/tabla']);
+          });
+      });
+    } else {
+      this.sgcService.createProv(form.value).subscribe((res) => {
+        console.log(res);
+        alert('Proveedor creado correctamente');
+        form.reset();
+        this.sgcService.datosProveedor.id = -1;
+        // Recargar la página después de la operación
+        this.router
+          .navigateByUrl('/proveedor', { skipLocationChange: true })
+          .then(() => {
+            this.router.navigate(['/proveedor/tabla']);
+          });
+      });
+    }
   }
-
-  }
-
 }

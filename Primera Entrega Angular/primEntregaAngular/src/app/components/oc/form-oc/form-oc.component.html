@@ -5,7 +5,7 @@
       <form #miForm2="ngForm" (ngSubmit)="createOrden(miForm2)">
         <fieldset>
           <legend class="mb-xl-5">CARGUE UNA ORDEN DE COMPRA</legend>
-          <input type="hidden" name="id" [(ngModel)]="">
+          <input type="hidden" name="id" [(ngModel)]="sgcOrdenService.datosOrden.id" />
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label">NUMERO DE ORDEN</label>
               <input
@@ -13,7 +13,8 @@
                 id="numero"
                 class="form-control"
                 placeholder=""
-                name="numeroOrden" />
+                name="numeroOrden"
+                [(ngModel)]="sgcOrdenService.datosOrden.numeroOrden" />
             </div>
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label">FECHA DE EMISION</label>
@@ -22,7 +23,8 @@
                 id="emision"
                 class="form-control"
                 placeholder=""
-                name="fechaEmision" />
+                name="fechaEmision"
+                [(ngModel)]="sgcOrdenService.datosOrden.fechaEmision"/>
             </div>
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label"
@@ -34,7 +36,8 @@
                 class="form-control"
                 placeholder=""
                 name="fechaEntrega"
-                 />
+                [(ngModel)]="sgcOrdenService.datosOrden.fechaEntrega"
+                />
             </div>
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label"
@@ -45,19 +48,19 @@
                 id="recepcion"
                 class="form-control"
                 placeholder=""
-                name="direccion" />
+                name="direccion"
+                [(ngModel)]="sgcOrdenService.datosOrden.direccion"/>
             </div>
             <div class="mb-3">
               <label for="proveedor2" class="form-label">ELIJA UN PROVEEDOR</label>
-              <select id="proveedor2" class="form-select" name="proveedor_razon">
+              <select id="proveedor" class="form-select" name="proveedor_razon" [(ngModel)]="sgcOrdenService.datosOrden.proveedor_razon">
                 <option *ngFor="let proveedor of proveedores" [value]="proveedor.razon">{{ proveedor.razon }}</option>
-
-              </select></div>
+              </select>
+            </div>
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label"
-                >Elija Producto</label
-              >
-              <select id="proveedor" class="form-select" name="proveedor_razon" [(ngModel)]="sgcProdService.datosProducto.proveedor_razon">
+                >Elija Producto</label>
+              <select id="producto" class="form-select" name="nombreProducto" [(ngModel)]="sgcOrdenService.datosOrden.nombreProducto">
                 <option *ngFor="let producto of productos" [value]="producto.nombreProducto">{{ producto.nombreProducto }}</option>
               </select>
             </div>
@@ -70,7 +73,8 @@
                 id="cantidad"
                 class="form-control"
                 placeholder=""
-                name="Cantidad" />
+                name="Cantidad"
+                [(ngModel)]="sgcOrdenService.datosOrden.cantidad" />
             </div>
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label"
@@ -81,7 +85,8 @@
                 id="total"
                 class="form-control"
                 placeholder=""
-                name="cantidad" />
+                name="cantidad"
+                [(ngModel)]="sgcOrdenService.datosOrden.total" />
             </div>
             <button type="submit" class="btn btn-primary" id="guardar">
               GUARDAR
@@ -90,4 +95,4 @@
         </form>
       </div>
     </div>
-  </div>
+</div>

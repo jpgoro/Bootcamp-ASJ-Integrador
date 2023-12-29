@@ -5,6 +5,8 @@ import { SgcService } from '../../../services/sgc.service';
 import { SgcOcService } from '../../../services/sgc-oc.service';
 import { Proveedor } from '../../../models/proveedor';
 import { Producto } from '../../../models/producto';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-form-oc',
@@ -14,7 +16,7 @@ import { Producto } from '../../../models/producto';
 export class FormOcComponent implements OnInit {
   proveedores: Proveedor[] = [];
   productos: Producto[] = [];
-  constructor(public sgcProdService : SgcProdService, public sgcService : SgcService, public sgcOrdenService : SgcOcService){}
+  constructor(public sgcProdService : SgcProdService, public sgcService : SgcService, public sgcOrdenService : SgcOcService, private router: Router){}
 
 
   ngOnInit(): void {
@@ -33,17 +35,22 @@ export class FormOcComponent implements OnInit {
   createOrden(form:NgForm){
     console.log(form.value)
     if(form.value.id !=-1){
-      /* this.sgcProdService.updateProducto(form.value).subscribe((res)=>{
+      this.sgcOrdenService.updateOrden(form.value).subscribe((res)=>{
         console.log(res);
-        alert('Producto modificado correctamente');
+        alert('Orden modificada correctamente');
       form.reset();
-      }) */
+      })
       console.log('modificando')
     }else{
     this.sgcOrdenService.createOrd(form.value).subscribe((res) =>{
       console.log(res);
       alert('Orden creada correctamente');
       form.reset();
+      this.router
+      .navigateByUrl('/oc', { skipLocationChange: true })
+      .then(() => {
+        this.router.navigate(['/oc/tabla']);
+      });
     })
   }
 

@@ -12,6 +12,7 @@ export class SgcOcService {
   datosOrden: Orden = {
     id: -1,
   numeroOrden: 0,
+  estado: true,
   fechaEmision: '',
   fechaEntrega: '',
   direccion: '',

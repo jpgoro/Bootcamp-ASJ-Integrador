@@ -1,6 +1,7 @@
 export interface Orden {
   id: number;
   numeroOrden: number;
+  estado: boolean;
   fechaEmision: string;
   fechaEntrega: string;
   direccion: string;
