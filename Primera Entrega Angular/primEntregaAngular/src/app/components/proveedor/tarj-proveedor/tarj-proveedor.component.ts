@@ -31,8 +31,11 @@ export class TarjProveedorComponent implements OnInit{
     rubro: prov.rubro,
     email: prov.email,
     direccion: prov.direccion,
-    datosF: prov.datosF,
-    contacto: prov.contacto
+    cuit: prov.cuit,
+    iva: prov.iva,
+    contacto: prov.contacto,
+    telefono: prov.telefono,
+    url: prov.url
   };
 
   }

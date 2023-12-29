@@ -1,5 +1,5 @@
 <div class="container " style="background-color: #e2d5de;">
-  
+
   <div class="container " style="background-color: #e2d5de;">
 
     <div class="row" id="contenidos">
@@ -24,14 +24,15 @@
             </div>
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label">CATEGORIA</label>
-              <input
-                type="text"
-                id="categoria"
-                class="form-control"
-                placeholder=""
-                name="categoria"
-                [(ngModel)]="sgcProdService.datosProducto.categoria"
-              />
+              <select id="iva" class="form-select" name="categoria" [(ngModel)]="sgcProdService.datosProducto.categoria">
+                <option [value]="'alimentos'">Alimentos</option>
+                <option [value]="'electronica'">Electronica</option>
+                <option [value]="'automotriz'">Automotriz</option>
+                <option [value]="'laboratorio'">Laboratorio</option>
+                <option [value]="'salud'">Saludo</option>
+                <option [value]="'textil'">Textil</option>
+                <option [value]="'limpieza'">Limpieza</option>
+              </select>
             </div>
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label"

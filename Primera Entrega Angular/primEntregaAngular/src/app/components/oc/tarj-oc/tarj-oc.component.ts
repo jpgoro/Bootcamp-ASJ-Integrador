@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Orden } from '../../../models/orden';
 import { SgcOcService } from '../../../services/sgc-oc.service';
 
@@ -20,6 +20,14 @@ export class TarjOcComponent implements OnInit{
     this.sgcOrdenService.getOrdenes().subscribe((res)=>{
       this.ordenes = res;
     })
+  }
+
+  cancelarOrden(id: number): void {
+    this.sgcOrdenService.cancelarOrden(id).subscribe((res) => {
+      console.log(res);
+      // Actualizar la lista de órdenes después de cancelar
+      this.list();
+    });
   }
 
 

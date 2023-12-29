@@ -11,4 +11,5 @@ export interface Orden {
   productoId: number;
   cantidad:string;
   total:number;
+  cancelada: boolean;
 }

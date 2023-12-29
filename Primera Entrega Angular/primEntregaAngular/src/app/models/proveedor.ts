@@ -5,6 +5,9 @@ export interface Proveedor {
   rubro: string;
   email: string;
   direccion: string;
-  datosF: string;
+  cuit: string;
+  iva: string,
   contacto: string;
+  telefono:number,
+  url: string
 }

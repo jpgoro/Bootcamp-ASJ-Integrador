@@ -22,6 +22,7 @@ export class SgcOcService {
   productoId: 0,
   cantidad:'',
   total:0,
+  cancelada:false
   }
 
   constructor() {
@@ -56,6 +57,17 @@ export class SgcOcService {
         this.ordenes[index] = orden;
         localStorage.setItem('ordenes', JSON.stringify(this.ordenes));
         return of({ message: 'Orden actualizada exitosamente' });
+      } else {
+        return of({ error: 'Orden no encontrada' });
+      }
+    }
+
+    public cancelarOrden(id: number): Observable<any> {
+      const orden = this.ordenes.find((p) => p.id === id);
+      if (orden) {
+        orden.cancelada = true;
+        localStorage.setItem('ordenes', JSON.stringify(this.ordenes));
+        return of({ message: 'Orden cancelada exitosamente' });
       } else {
         return of({ error: 'Orden no encontrada' });
       }

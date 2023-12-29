@@ -140,6 +140,28 @@
             />
           </div>
           <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">TELEFONO</label>
+            <input
+              type="number"
+              id="tel"
+              class="form-control"
+              placeholder=""
+              name="telefono"
+              [(ngModel)]="sgcService.datosProveedor.telefono"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">URL</label>
+            <input
+              type="text"
+              id="url"
+              class="form-control"
+              placeholder=""
+              name="url"
+              [(ngModel)]="sgcService.datosProveedor.url"
+            />
+          </div>
+          <div class="mb-3">
             <label for="disabledTextInput" class="form-label">DIRECCION</label>
             <input
               type="text"
@@ -152,7 +174,7 @@
           </div>
           <div class="mb-3">
             <label for="disabledTextInput" class="form-label"
-              >DATOS FISCALES</label
+              >CUIT</label
             >
             <input
               type="text"
@@ -160,8 +182,17 @@
               class="form-control"
               placeholder=""
               name="datosF"
-              [(ngModel)]="sgcService.datosProveedor.datosF"
+              [(ngModel)]="sgcService.datosProveedor.cuit"
             />
+            <label for="disabledTextInput" class="form-label"
+              >IVA</label
+            >
+            <select id="iva" class="form-select" name="iva" [(ngModel)]="sgcService.datosProveedor.iva">
+              <option [value]="'responsable Inscripto'">Responsable Inscripto</option>
+              <option [value]="'iva no responsable'">IVA no Responsable</option>
+              <option [value]="'iva exento'">IVA exento</option>
+              <option [value]="'responsable monotributista'">Responsable Monotributo</option>
+            </select>
           </div>
 
           <div class="mb-3">

@@ -17,7 +17,8 @@
         <tbody>
           <tr *ngFor="let orden of ordenes">
             <td>{{ orden.numeroOrden }}</td>
-            <td >{{ orden.estado }}</td>
+            <!-- <td >{{ orden.estado }}</td> -->
+            <td>{{ orden.cancelada ? 'CANCELADA' : 'Activa' }}</td>
             <td>{{ orden.fechaEmision }}</td>
             <td>{{ orden.fechaEntrega }}</td>
             <td>{{ orden.direccion }}</td>
@@ -25,8 +26,12 @@
             <td>{{ orden.nombreProducto }}</td>
             <td>{{ orden.cantidad }}</td>
             <td>{{ orden.total }}</td>
-            <button type="button" class="btn btn-outline-warning btn-sm  me-4">Cancelar</button>
-            <button type="button" class="btn btn-outline-warning btn-sm  me-4">Detalle</button>
+            <!-- <button type="button" class="btn btn-outline-warning btn-sm  me-4">Cancelar</button>
+            <button type="button" class="btn btn-outline-warning btn-sm  me-4">Detalle</button> -->
+            <button *ngIf="!orden.cancelada" type="button" class="btn btn-outline-danger btn-sm me-4" (click)="cancelarOrden(orden.id)">
+              Cancelar
+            </button>
+            <button *ngIf="!orden.cancelada" type="button" class="btn btn-outline-primary btn-sm me-4">Detalle</button>
 
           </tr>
         </tbody>

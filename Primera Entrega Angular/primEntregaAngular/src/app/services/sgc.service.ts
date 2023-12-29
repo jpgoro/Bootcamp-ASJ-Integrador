@@ -20,8 +20,11 @@ export class SgcService {
     rubro: '',
     email: '',
     direccion: '',
-    datosF: '',
+    cuit: '',
+    iva:'',
     contacto: '',
+    telefono: 0,
+    url:'',
   };
 
   constructor(){

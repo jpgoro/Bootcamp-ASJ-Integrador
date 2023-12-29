@@ -14,6 +14,7 @@ import { TarjProductoComponent } from './components/producto/tarj-producto/tarj-
 import { TarjOcComponent } from './components/oc/tarj-oc/tarj-oc.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { RouterModule } from '@angular/router';
     FormOcComponent,
     TarjProveedorComponent,
     TarjProductoComponent,
-    TarjOcComponent
+    TarjOcComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
