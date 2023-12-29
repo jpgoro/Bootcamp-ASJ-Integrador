@@ -53,7 +53,7 @@
             </div>
             <div class="mb-3">
               <label for="proveedor2" class="form-label">ELIJA UN PROVEEDOR</label>
-              <select id="proveedor" class="form-select" name="proveedor_razon" [(ngModel)]="sgcOrdenService.datosOrden.proveedor_razon">
+              <select id="proveedor" class="form-select" name="proveedor_razon" [(ngModel)]="sgcOrdenService.datosOrden.proveedor_razon" (change)="onProveedorChange()">
                 <option *ngFor="let proveedor of proveedores" [value]="proveedor.razon">{{ proveedor.razon }}</option>
               </select>
             </div>
@@ -61,33 +61,32 @@
               <label for="disabledTextInput" class="form-label"
                 >Elija Producto</label>
               <select id="producto" class="form-select" name="nombreProducto" [(ngModel)]="sgcOrdenService.datosOrden.nombreProducto">
-                <option *ngFor="let producto of productos" [value]="producto.nombreProducto">{{ producto.nombreProducto }}</option>
+                <option *ngFor="let producto of productosFiltrados" [value]="producto.nombreProducto">{{ producto.nombreProducto }}</option>
               </select>
             </div>
             <div class="mb-3">
-              <label for="disabledTextInput" class="form-label"
+              <label for="cantidad" class="form-label"
                 >CANTIDAD</label
               >
               <input
-                type="text"
+                type="number"
                 id="cantidad"
                 class="form-control"
                 placeholder=""
-                name="Cantidad"
-                [(ngModel)]="sgcOrdenService.datosOrden.cantidad" />
+                name="cantidad"
+                [(ngModel)]="sgcOrdenService.datosOrden.cantidad" (change)="onCantidadChange()"/>
             </div>
             <div class="mb-3">
-              <label for="disabledTextInput" class="form-label"
-                >TOTAL</label
-              >
+              <label for="disabledTextInput" class="form-label">TOTAL</label>
               <input
                 type="text"
                 id="total"
                 class="form-control"
                 placeholder=""
-                name="cantidad"
+                name="total"
                 [(ngModel)]="sgcOrdenService.datosOrden.total" />
             </div>
+
             <button type="submit" class="btn btn-primary" id="guardar">
               GUARDAR
             </button>

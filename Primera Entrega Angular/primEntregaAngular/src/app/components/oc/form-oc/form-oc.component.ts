@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 export class FormOcComponent implements OnInit {
   proveedores: Proveedor[] = [];
   productos: Producto[] = [];
+  productosFiltrados: Producto[] = [];
   constructor(public sgcProdService : SgcProdService, public sgcService : SgcService, public sgcOrdenService : SgcOcService, private router: Router){}
 
 
@@ -27,8 +28,46 @@ export class FormOcComponent implements OnInit {
 
     this.sgcProdService.getPoductos().subscribe((res)=>{
       this.productos = res;
-
+      this.productosFiltrados = res;
     })
+
+  }
+
+  onProveedorChange() {
+    // Filtrar productos por proveedor
+    const proveedorSeleccionado = this.sgcOrdenService.datosOrden.proveedor_razon;
+    this.productosFiltrados = this.productos.filter(
+      (producto) => producto.proveedor_razon === proveedorSeleccionado
+    );
+    // Resetear el producto seleccionado y el total al cambiar el proveedor
+    this.sgcOrdenService.datosOrden.nombreProducto = '';
+    this.sgcOrdenService.datosOrden.total = 0;
+  }
+
+  onCantidadChange() {
+    /* // Actualizar el total al cambiar la cantidad
+    const cantidad = this.sgcOrdenService.datosOrden.cantidad;
+    const productoSeleccionado = this.productosFiltrados.find(
+      (producto) => producto.nombreProducto === this.sgcOrdenService.datosOrden.nombreProducto
+    );
+
+    if (productoSeleccionado) {
+      const precio = parseFloat(productoSeleccionado.precio);
+      this.sgcOrdenService.datosOrden.total = cantidad * precio;
+    } */
+    const cantidad =parseFloat(this.sgcOrdenService.datosOrden.cantidad);
+  const productoSeleccionado = this.productosFiltrados.find(
+    (producto) => producto.nombreProducto === this.sgcOrdenService.datosOrden.nombreProducto
+  );
+
+  if (productoSeleccionado) {
+    const precio = parseFloat(productoSeleccionado.precio);
+    this.sgcOrdenService.datosOrden.total = cantidad * precio;
+  }/*  else {
+    // Si el producto seleccionado no está disponible, reiniciar el total
+    this.sgcOrdenService.datosOrden.total = 0;
+  } */
+
 
   }
 
