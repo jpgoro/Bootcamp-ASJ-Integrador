@@ -14,7 +14,8 @@
                 class="form-control"
                 placeholder=""
                 name="numeroOrden"
-                [(ngModel)]="sgcOrdenService.datosOrden.numeroOrden" />
+                [(ngModel)]="sgcOrdenService.datosOrden.numeroOrden"
+                required/>
             </div>
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label">FECHA DE EMISION</label>
@@ -24,7 +25,8 @@
                 class="form-control"
                 placeholder=""
                 name="fechaEmision"
-                [(ngModel)]="sgcOrdenService.datosOrden.fechaEmision"/>
+                [(ngModel)]="sgcOrdenService.datosOrden.fechaEmision"
+                required/>
             </div>
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label"
@@ -37,6 +39,7 @@
                 placeholder=""
                 name="fechaEntrega"
                 [(ngModel)]="sgcOrdenService.datosOrden.fechaEntrega"
+                required
                 />
             </div>
             <div class="mb-3">
@@ -49,11 +52,12 @@
                 class="form-control"
                 placeholder=""
                 name="direccion"
-                [(ngModel)]="sgcOrdenService.datosOrden.direccion"/>
+                [(ngModel)]="sgcOrdenService.datosOrden.direccion"
+                required/>
             </div>
             <div class="mb-3">
               <label for="proveedor2" class="form-label">ELIJA UN PROVEEDOR</label>
-              <select id="proveedor" class="form-select" name="proveedor_razon" [(ngModel)]="sgcOrdenService.datosOrden.proveedor_razon" (change)="onProveedorChange()">
+              <select id="proveedor" class="form-select" name="proveedor_razon" [(ngModel)]="sgcOrdenService.datosOrden.proveedor_razon"  (change)="onProveedorChange()">
                 <option *ngFor="let proveedor of proveedores" [value]="proveedor.razon">{{ proveedor.razon }}</option>
               </select>
             </div>
@@ -74,7 +78,7 @@
                 class="form-control"
                 placeholder=""
                 name="cantidad"
-                [(ngModel)]="sgcOrdenService.datosOrden.cantidad" (change)="onCantidadChange()"/>
+                [(ngModel)]="sgcOrdenService.datosOrden.cantidad" (change)="onCantidadChange()"  required/>
             </div>
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label">TOTAL</label>
@@ -84,10 +88,10 @@
                 class="form-control"
                 placeholder=""
                 name="total"
-                [(ngModel)]="sgcOrdenService.datosOrden.total" />
+                [(ngModel)]="sgcOrdenService.datosOrden.total" required/>
             </div>
 
-            <button type="submit" class="btn btn-primary" id="guardar">
+            <button type="submit" class="btn btn-primary" id="guardar" [disabled]="!miForm2.valid">
               GUARDAR
             </button>
           </fieldset>

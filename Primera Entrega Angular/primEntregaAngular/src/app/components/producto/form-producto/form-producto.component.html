@@ -3,10 +3,10 @@
   <div class="container " style="background-color: #e2d5de;">
 
     <div class="row" id="contenidos">
-      <div class="col mt-5">
+      <div class="col  mt-5">
         <form #miForm1="ngForm" (ngSubmit)="createProducto(miForm1)" >
           <fieldset>
-            <legend class="mb-xl-5">CARGUE UN PRODUCTO</legend>
+            <legend class="mb-xl-5 text-dark">CARGUE UN PRODUCTO</legend>
             <input type="hidden" name="id" [(ngModel)]="sgcProdService.datosProducto.id">
             <input type="hidden" name="idProv" [(ngModel)]="sgcProdService.datosProducto.proveedor_id">
             <input type="hidden" name="razon" [(ngModel)]="sgcProdService.datosProducto.proveedor_razon">

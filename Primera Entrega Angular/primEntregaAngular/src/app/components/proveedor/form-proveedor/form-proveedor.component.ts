@@ -15,6 +15,7 @@ export class FormProveedorComponent implements OnInit {
   ngOnInit(): void {}
 
   createProveedor(form: NgForm) {
+
     if (form.value.id != -1) {
       this.sgcService.updateProveedor(form.value).subscribe((res) => {
         console.log(res);

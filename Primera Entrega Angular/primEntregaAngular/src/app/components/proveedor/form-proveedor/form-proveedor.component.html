@@ -101,7 +101,15 @@
               placeholder=""
               name="codigo"
               [(ngModel)]="sgcService.datosProveedor.codigo"
+              required
+              minlength="4"
+              #name="ngModel"
             />
+            <div *ngIf="name.errors?.['minlength']" class="col-auto">
+              <span id="passwordHelpInline" class="form-text">
+                Minimo 4 caracteres
+              </span>
+            </div>
 
           </div>
           <div class="mb-3">
@@ -115,6 +123,7 @@
               placeholder=""
               name="razon"
               [(ngModel)]="sgcService.datosProveedor.razon"
+              required
             />
           </div>
           <div class="mb-3">
@@ -126,6 +135,7 @@
               placeholder=""
               name="rubro"
               [(ngModel)]="sgcService.datosProveedor.rubro"
+              required
             />
           </div>
           <div class="mb-3">
@@ -137,6 +147,7 @@
               placeholder=""
               name="email"
               [(ngModel)]="sgcService.datosProveedor.email"
+              required
             />
           </div>
           <div class="mb-3">
@@ -148,6 +159,7 @@
               placeholder=""
               name="telefono"
               [(ngModel)]="sgcService.datosProveedor.telefono"
+              required
             />
           </div>
           <div class="mb-3">
@@ -159,6 +171,7 @@
               placeholder=""
               name="url"
               [(ngModel)]="sgcService.datosProveedor.url"
+              required
             />
           </div>
           <div class="mb-3">
@@ -170,6 +183,7 @@
               placeholder=""
               name="direccion"
               [(ngModel)]="sgcService.datosProveedor.direccion"
+              required
             />
           </div>
           <div class="mb-3">
@@ -183,11 +197,22 @@
               placeholder=""
               name="datosF"
               [(ngModel)]="sgcService.datosProveedor.cuit"
+              required
+              maxlength="11"
+              #name="ngModel"
             />
+            <div *ngIf="name.errors?.['maxLength']" class="col-auto">
+              <span id="passwordHelpInline" class="form-text">
+                Maximo 11caracteres
+              </span>
+            </div>
+
+          </div>
+            <div>
             <label for="disabledTextInput" class="form-label"
               >IVA</label
             >
-            <select id="iva" class="form-select" name="iva" [(ngModel)]="sgcService.datosProveedor.iva">
+            <select id="iva" class="form-select" name="iva" [(ngModel)]="sgcService.datosProveedor.iva" required>
               <option [value]="'responsable Inscripto'">Responsable Inscripto</option>
               <option [value]="'iva no responsable'">IVA no Responsable</option>
               <option [value]="'iva exento'">IVA exento</option>
@@ -203,13 +228,14 @@
               type="text"
               id="contacto"
               class="form-control"
-              placeholder=""
+              placeholder="Nombre y apellido"
               name="contacto"
               [(ngModel)]="sgcService.datosProveedor.contacto"
+              required
             />
           </div>
 
-          <button type="submit" class="btn btn-primary" id="guardar">
+          <button type="submit" class="btn btn-primary" id="guardar" [disabled]="!miForm.valid">
             GUARDAR
           </button>
         </fieldset>

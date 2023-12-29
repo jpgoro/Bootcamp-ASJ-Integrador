@@ -6,7 +6,7 @@
           <th scope="col">Código</th>
           <th scope="col">Razón Social</th>
           <th scope="col">Rubro</th>
-          <th scope="col">Email y TEL.</th>
+          <th scope="col">Email/ TEL/ URL</th>
           <th scope="col">Direccion</th>
           <th scope="col">Datos Fiscales</th>
           <th scope="col">Datos de contacto</th>
@@ -17,10 +17,10 @@
           <td>{{ proveedor.codigo }}</td>
           <td>{{ proveedor.razon }}</td>
           <td>{{ proveedor.rubro }}</td>
-          <td>{{ proveedor.email }} - {{proveedor.telefono}} - {{proveedor.url}}</td>
+          <td>{{ proveedor.email }} | {{proveedor.telefono}} | {{proveedor.url}}</td>
           <td>{{ proveedor.contacto }}</td>
 
-          <button type="button" class="btn btn-outline-warning btn-sm  me-4"(click)="editarProveedor(proveedor)" >Modificar</button>
+          <button type="button" class="btn btn-outline-warning btn-sm  me-4"(click)="editarProveedor(proveedor)" [routerLink]="['/proveedor', proveedor.id, 'editar']" >Modificar</button>
           <button type="button" class="btn btn-outline-danger btn-sm " (click)="delete(proveedor.id)">Eliminar</button>
 
         </tr>
