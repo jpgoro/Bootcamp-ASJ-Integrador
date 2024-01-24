@@ -1,4 +1,4 @@
-ALTER TABLE Proveedores
+/*ALTER TABLE Proveedores
 ADD proveedor_cuit_new BIGINT;
 
 UPDATE Proveedores
@@ -10,7 +10,7 @@ DROP COLUMN proveedor_cuit;
 EXEC sp_rename 'Proveedores.proveedor_cuit_new', 'proveedor_cuit', 'COLUMN';
 ALTER TABLE Ordenes_Compras
 ADD total FLOAT,
-    activa BIT;
+    activa BIT;*/
 
 --punto1
 SELECT
@@ -166,8 +166,19 @@ ORDER BY
 
 --punto 9
 
-	
-
-
+-- detalle de compra esta tratando de usar total, esa columna pertene a oc. Corregir eso
+	SELECT
+    P.producto_SKU,
+    P.producto_nombre,
+    DOC.cantidad,
+    OC.total
+FROM
+    Ordenes_Compras OC
+JOIN
+    Detalles_OC DOC ON OC.id = DOC.orden_compra_id
+JOIN
+    Productos P ON DOC.producto_id = P.id
+WHERE
+    OC.proveedor_id = 3;
 
 
