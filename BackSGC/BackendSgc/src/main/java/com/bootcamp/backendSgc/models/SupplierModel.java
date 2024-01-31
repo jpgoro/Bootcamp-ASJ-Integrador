@@ -1,112 +1,211 @@
 package com.bootcamp.backendSgc.models;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Entity
+@Table(name="suppliers")
 public class SupplierModel {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String supplier_code;
-	private String supplier_legalName;
-	private String supplier_web;
-	private String supplier_tel;
-	private String supplier_email;
-	private String supplier_cuit;
-	private Timestamp created_at;
-	private Timestamp updated_at;
-	private int id_industry;
-	private int id_address;
-	private int id_conditionIva;
+	@Column(name="supplier_code", nullable = false)
+	@NotNull(message = "The supplier_code cannot be null")
+	private String code;
+	@Column(name="supplier_legalName", nullable = false)
+	@NotNull(message = "The supplier_legalName cannot be null")
+	private String legalName;
+	@Column(name="supplier_web", nullable = false)
+	@NotNull(message = "The supplier_web cannot be null")
+	private String web;
+	@Column(name="supplier_tel", nullable = false)
+	@NotNull(message = "The supplier_tel cannot be null")
+	private String tel;
+	@Column(name="supplier_email", nullable = false)
+	@NotNull(message = "The supplier_email cannot be null")
+	@Email
+	private String email;
+	@Column(name="supplier_cuit", nullable = false)
+	@NotNull(message = "The supplier_cuit cannot be null")
+	private String cuit;
+	@Column(name="is_deleted",nullable = false)
+	@NotNull(message = "The deleted cannot be null")
+	private boolean isDeleted;
+	@Column(name = "created_at")
+	@Temporal(TemporalType.TIMESTAMP)
+	private LocalDateTime createdAt;
+
+	@Column(name = "updated_at")
+	@Temporal(TemporalType.TIMESTAMP)
+	private LocalDateTime updatedAt;
+	@ManyToOne
+	@JoinColumn(name="id_industry",referencedColumnName = "id", nullable = false)
+	//@NotNull(message = "The id_industry cannot be null")
+	private IndustryModel industry;
+	@ManyToOne
+	@JoinColumn(name="id_address",referencedColumnName = "id", nullable = false)
+	//@NotNull(message = "The id_address cannot be null")
+	private AddressModel address;
+	@ManyToOne
+	@JoinColumn(name="id_conditionIva",referencedColumnName = "id", nullable = false)
+	//@NotNull(message = "The id_conditionIva cannot be null")
+	private ConditionIvaModel conditionIva;
+	@OneToOne
+	@JoinColumn(name = "id_contact",referencedColumnName = "id", nullable = false)
+	//@NotNull(message = "The id_contact cannot be null")
+	private ContactModel contact;
+	@OneToMany(mappedBy = "supplier")
+	@JsonManagedReference
+	private List<ProductModel> product;
+	@OneToMany (mappedBy = "supplier")
+	@JsonManagedReference
+	private List<PurchaseOrderModel> purchaseOrd;
 	public SupplierModel() {
+		super();
 	}
-	public SupplierModel(Integer id, String supplier_code, String supplier_legalName, String supplier_web,
-			String supplier_tel, String supplier_email, String supplier_cuit, Timestamp created_at,
-			Timestamp updated_at, int id_industry, int id_address, int id_conditionIva) {
+	public SupplierModel(Integer id,String code,String legalName,String web,String tel,String email,String cuit,boolean isDeleted, LocalDateTime createdAt,
+			LocalDateTime updatedAt, IndustryModel industry, AddressModel address, ConditionIvaModel conditionIva,
+			ContactModel contact, List<ProductModel> product, List<PurchaseOrderModel> purchaseOrd) {
 		this.id = id;
-		this.supplier_code = supplier_code;
-		this.supplier_legalName = supplier_legalName;
-		this.supplier_web = supplier_web;
-		this.supplier_tel = supplier_tel;
-		this.supplier_email = supplier_email;
-		this.supplier_cuit = supplier_cuit;
-		this.created_at = created_at;
-		this.updated_at = updated_at;
-		this.id_industry = id_industry;
-		this.id_address = id_address;
-		this.id_conditionIva = id_conditionIva;
+		this.code = code;
+		this.legalName = legalName;
+		this.web = web;
+		this.tel = tel;
+		this.email = email;
+		this.cuit = cuit;
+		this.isDeleted = isDeleted;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.industry = industry;
+		this.address = address;
+		this.conditionIva = conditionIva;
+		this.contact = contact;
+		this.product = product;
+		this.purchaseOrd = purchaseOrd;
 	}
 	public Integer getId() {
 		return id;
 	}
-	public String getSupplier_code() {
-		return supplier_code;
+	public String getCode() {
+		return code;
 	}
-	public String getSupplier_legalName() {
-		return supplier_legalName;
+	public String getLegalName() {
+		return legalName;
 	}
-	public String getSupplier_web() {
-		return supplier_web;
+	public String getWeb() {
+		return web;
 	}
-	public String getSupplier_tel() {
-		return supplier_tel;
+	public String getTel() {
+		return tel;
 	}
-	public String getSupplier_email() {
-		return supplier_email;
+	public String getEmail() {
+		return email;
 	}
-	public String getSupplier_cuit() {
-		return supplier_cuit;
+	public String getCuit() {
+		return cuit;
 	}
-	public Timestamp getCreated_at() {
-		return created_at;
+	public boolean isDeleted() {
+		return isDeleted;
 	}
-	public Timestamp getUpdated_at() {
-		return updated_at;
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
 	}
-	public int getId_industry() {
-		return id_industry;
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
 	}
-	public int getId_address() {
-		return id_address;
+	public IndustryModel getIndustry() {
+		return industry;
 	}
-	public int getId_conditionIva() {
-		return id_conditionIva;
+	public AddressModel getAddress() {
+		return address;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public ConditionIvaModel getConditionIva() {
+		return conditionIva;
 	}
-	public void setSupplier_code(String supplier_code) {
-		this.supplier_code = supplier_code;
+	public ContactModel getContact() {
+		return contact;
 	}
-	public void setSupplier_legalName(String supplier_legalName) {
-		this.supplier_legalName = supplier_legalName;
+	public List<ProductModel> getProduct() {
+		return product;
 	}
-	public void setSupplier_web(String supplier_web) {
-		this.supplier_web = supplier_web;
+	public List<PurchaseOrderModel> getPurchaseOrd() {
+		return purchaseOrd;
 	}
-	public void setSupplier_tel(String supplier_tel) {
-		this.supplier_tel = supplier_tel;
+	public void setCode(String code) {
+		this.code = code;
 	}
-	public void setSupplier_email(String supplier_email) {
-		this.supplier_email = supplier_email;
+	public void setLegalName(String legalName) {
+		this.legalName = legalName;
 	}
-	public void setSupplier_cuit(String supplier_cuit) {
-		this.supplier_cuit = supplier_cuit;
+	public void setWeb(String web) {
+		this.web = web;
 	}
-	public void setCreated_at(Timestamp created_at) {
-		this.created_at = created_at;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
-	public void setUpdated_at(Timestamp updated_at) {
-		this.updated_at = updated_at;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public void setId_industry(int id_industry) {
-		this.id_industry = id_industry;
+	public void setCuit(String cuit) {
+		this.cuit = cuit;
 	}
-	public void setId_address(int id_address) {
-		this.id_address = id_address;
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
-	public void setId_conditionIva(int id_conditionIva) {
-		this.id_conditionIva = id_conditionIva;
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
-	
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	public void setIndustry(IndustryModel industry) {
+		this.industry = industry;
+	}
+	public void setAddress(AddressModel address) {
+		this.address = address;
+	}
+	public void setConditionIva(ConditionIvaModel conditionIva) {
+		this.conditionIva = conditionIva;
+	}
+	public void setContact(ContactModel contact) {
+		this.contact = contact;
+	}
+	public void setProduct(List<ProductModel> product) {
+		this.product = product;
+	}
+	public void setPurchaseOrd(List<PurchaseOrderModel> purchaseOrd) {
+		this.purchaseOrd = purchaseOrd;
+	}
+	@Override
+	public String toString() {
+		return "SupplierModel [id=" + id + ", code=" + code + ", legalName=" + legalName + ", web=" + web + ", tel="
+				+ tel + ", email=" + email + ", cuit=" + cuit + ", isDeleted=" + isDeleted + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + ", industry=" + industry + ", address=" + address + ", conditionIva="
+				+ conditionIva + ", contact=" + contact + ", product=" + product + ", purchaseOrd=" + purchaseOrd + "]";
+	}
 	
 	
 }

@@ -1,92 +1,159 @@
 package com.bootcamp.backendSgc.models;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name="purchases_orders")
 public class PurchaseOrderModel {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Integer order_number;
-	private Timestamp issuance_date;
-	private Timestamp delivery_date;
+	@Column(name="order_number",nullable = false)
+	@NotNull(message = "The order_number be null")
+	private Integer number;
+	@Column(name = "issue_date", nullable = false, unique = true)
+	@NotNull
+	private LocalDateTime issueDate;
+	@Column(name = "delivery_date", nullable = false)
+	@NotNull
+	private LocalDateTime deliveryDate;
+	@Column(nullable = false)
+	@NotNull(message = "The total be null")
+	@Positive
 	private Double total;
-	private boolean active;
-	private Timestamp created_at;
-	private Timestamp updated_at;
-	private int id_supplier;
-	private int id_status;
+	@Column(name="is_deleted",nullable = false)
+	@NotNull(message = "The deleted cannot be null")
+	private boolean isDeleted;
+	@Column(name = "created_at")
+	@Temporal(TemporalType.TIMESTAMP)
+	private LocalDateTime createdAt;
+
+	@Column(name = "updated_at")
+	@Temporal(TemporalType.TIMESTAMP)
+	private LocalDateTime updatedAt;
+	@ManyToOne
+	@JsonBackReference
+	@JoinColumn(name="id_supplier",referencedColumnName = "id", nullable = false)
+	//@NotNull(message = "The id_supplier cannot be null")
+	private SupplierModel supplier;
+	@ManyToOne
+	@JsonBackReference
+	@JoinColumn(name="id_status",referencedColumnName = "id", nullable = false)
+	//@NotNull(message = "The id_supplier cannot be null")
+	private StatusModel status;
+	@OneToMany(mappedBy = "purchaseOrder")
+	@JsonManagedReference
+	//@NotNull(message = "The detailOc cannot be null")
+	private List<DetailOcModel> detailOc;
 	public PurchaseOrderModel() {
 	}
-	public PurchaseOrderModel(Integer id, Integer order_number, Timestamp issuance_date, Timestamp delivery_date,
-			Double total, boolean active, Timestamp created_at, Timestamp updated_at, int id_supplier, int id_status) {
+	public PurchaseOrderModel(Integer id, Integer number,LocalDateTime issueDate,LocalDateTime deliveryDate,Double total,boolean isDeleted, LocalDateTime createdAt,
+			LocalDateTime updatedAt,SupplierModel supplier,StatusModel status,List<DetailOcModel> detailOc) {
 		this.id = id;
-		this.order_number = order_number;
-		this.issuance_date = issuance_date;
-		this.delivery_date = delivery_date;
+		this.number = number;
+		this.issueDate = issueDate;
+		this.deliveryDate = deliveryDate;
 		this.total = total;
-		this.active = active;
-		this.created_at = created_at;
-		this.updated_at = updated_at;
-		this.id_supplier = id_supplier;
-		this.id_status = id_status;
+		this.isDeleted = isDeleted;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.supplier = supplier;
+		this.status = status;
+		this.detailOc = detailOc;
 	}
 	public Integer getId() {
 		return id;
 	}
-	public Integer getOrder_number() {
-		return order_number;
+	public Integer getNumber() {
+		return number;
 	}
-	public Timestamp getIssuance_date() {
-		return issuance_date;
+	public LocalDateTime getIssueDate() {
+		return issueDate;
 	}
-	public Timestamp getDelivery_date() {
-		return delivery_date;
+	public LocalDateTime getDeliveryDate() {
+		return deliveryDate;
 	}
 	public Double getTotal() {
 		return total;
 	}
-	public boolean isActive() {
-		return active;
+	public boolean isDeleted() {
+		return isDeleted;
 	}
-	public Timestamp getCreated_at() {
-		return created_at;
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
 	}
-	public Timestamp getUpdated_at() {
-		return updated_at;
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
 	}
-	public int getId_supplier() {
-		return id_supplier;
+	public SupplierModel getSupplier() {
+		return supplier;
 	}
-	public int getId_status() {
-		return id_status;
+	public StatusModel getStatus() {
+		return status;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public List<DetailOcModel> getDetailOc() {
+		return detailOc;
 	}
-	public void setOrder_number(Integer order_number) {
-		this.order_number = order_number;
+	public void setNumber(Integer number) {
+		this.number = number;
 	}
-	public void setIssuance_date(Timestamp issuance_date) {
-		this.issuance_date = issuance_date;
+	public void setIssueDate(LocalDateTime issueDate) {
+		this.issueDate = issueDate;
 	}
-	public void setDelivery_date(Timestamp delivery_date) {
-		this.delivery_date = delivery_date;
+	public void setDeliveryDate(LocalDateTime deliveryDate) {
+		this.deliveryDate = deliveryDate;
 	}
 	public void setTotal(Double total) {
 		this.total = total;
 	}
-	public void setActive(boolean active) {
-		this.active = active;
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
-	public void setCreated_at(Timestamp created_at) {
-		this.created_at = created_at;
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
-	public void setUpdated_at(Timestamp updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
 	}
-	public void setId_supplier(int id_supplier) {
-		this.id_supplier = id_supplier;
+	public void setSupplier(SupplierModel supplier) {
+		this.supplier = supplier;
 	}
-	public void setId_status(int id_status) {
-		this.id_status = id_status;
+	public void setStatus(StatusModel status) {
+		this.status = status;
 	}
+	public void setDetailOc(List<DetailOcModel> detailOc) {
+		this.detailOc = detailOc;
+	}
+	@Override
+	public String toString() {
+		return "PurchaseOrderModel [id=" + id + ", number=" + number + ", issueDate=" + issueDate + ", deliveryDate="
+				+ deliveryDate + ", total=" + total + ", isDeleted=" + isDeleted + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + ", supplier=" + supplier + ", status=" + status + ", detailOc="
+				+ detailOc + "]";
+	}
+	
 	
 }
