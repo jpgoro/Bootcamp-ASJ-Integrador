@@ -41,10 +41,10 @@ public class AddressModel {
 	@NotNull(message = "The postalCode cannot be null")
 	@NotBlank
 	private String postalCode;
-	@Column(name = "created_at", nullable = false)
+	@Column(name = "created_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime createdAt;
-	@Column(name = "updated_at", nullable = false)
+	@Column(name = "updated_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime updatedAt;
 	@ManyToOne

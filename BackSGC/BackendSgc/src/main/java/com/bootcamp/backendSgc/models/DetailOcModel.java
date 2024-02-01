@@ -39,10 +39,10 @@ public class DetailOcModel {
 	@NotNull(message = "The price cannot be null")
 	@Positive
 	private Double price;
-	@Column(name = "created_at", nullable = false)
+	@Column(name = "created_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime createdAt;
-	@Column(name = "updated_at", nullable = false)
+	@Column(name = "updated_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime updatedAt;
 	@ManyToOne

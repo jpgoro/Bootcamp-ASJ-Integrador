@@ -77,18 +77,13 @@ public class SupplierModel {
 	@JoinColumn(name = "id_contact",referencedColumnName = "id", nullable = false)
 	//@NotNull(message = "The id_contact cannot be null")
 	private ContactModel contact;
-	@OneToMany(mappedBy = "supplier")
-	@JsonManagedReference
-	private List<ProductModel> product;
-	@OneToMany (mappedBy = "supplier")
-	@JsonManagedReference
-	private List<PurchaseOrderModel> purchaseOrd;
+	
 	public SupplierModel() {
 		super();
 	}
 	public SupplierModel(Integer id,String code,String legalName,String web,String tel,String email,String cuit,boolean isDeleted, LocalDateTime createdAt,
 			LocalDateTime updatedAt, IndustryModel industry, AddressModel address, ConditionIvaModel conditionIva,
-			ContactModel contact, List<ProductModel> product, List<PurchaseOrderModel> purchaseOrd) {
+			ContactModel contact) {
 		this.id = id;
 		this.code = code;
 		this.legalName = legalName;
@@ -103,8 +98,6 @@ public class SupplierModel {
 		this.address = address;
 		this.conditionIva = conditionIva;
 		this.contact = contact;
-		this.product = product;
-		this.purchaseOrd = purchaseOrd;
 	}
 	public Integer getId() {
 		return id;
@@ -148,12 +141,7 @@ public class SupplierModel {
 	public ContactModel getContact() {
 		return contact;
 	}
-	public List<ProductModel> getProduct() {
-		return product;
-	}
-	public List<PurchaseOrderModel> getPurchaseOrd() {
-		return purchaseOrd;
-	}
+	
 	public void setCode(String code) {
 		this.code = code;
 	}
@@ -193,19 +181,15 @@ public class SupplierModel {
 	public void setContact(ContactModel contact) {
 		this.contact = contact;
 	}
-	public void setProduct(List<ProductModel> product) {
-		this.product = product;
-	}
-	public void setPurchaseOrd(List<PurchaseOrderModel> purchaseOrd) {
-		this.purchaseOrd = purchaseOrd;
-	}
 	@Override
 	public String toString() {
 		return "SupplierModel [id=" + id + ", code=" + code + ", legalName=" + legalName + ", web=" + web + ", tel="
 				+ tel + ", email=" + email + ", cuit=" + cuit + ", isDeleted=" + isDeleted + ", createdAt=" + createdAt
 				+ ", updatedAt=" + updatedAt + ", industry=" + industry + ", address=" + address + ", conditionIva="
-				+ conditionIva + ", contact=" + contact + ", product=" + product + ", purchaseOrd=" + purchaseOrd + "]";
+				+ conditionIva + ", contact=" + contact + "]";
 	}
+	
+	
 	
 	
 }

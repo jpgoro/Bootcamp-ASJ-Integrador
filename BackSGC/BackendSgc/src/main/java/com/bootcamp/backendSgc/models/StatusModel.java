@@ -44,7 +44,7 @@ public class StatusModel {
 	public StatusModel() {
 	}
 	public StatusModel(Integer id, String status_name,
-			LocalDateTime createdAt, LocalDateTime updatedAt, List<PurchaseOrderModel> purchaseOrd) {
+			LocalDateTime createdAt, LocalDateTime updatedAt) {
 		this.id = id;
 		this.status_name = status_name;
 		this.createdAt = createdAt;
@@ -86,6 +86,7 @@ public class StatusModel {
 		return "StatusModel [id=" + id + ", status_name=" + status_name + ", createdAt=" + createdAt + ", updatedAt="
 				+ updatedAt + "]";
 	}
+	
 	
 	
 }

@@ -28,24 +28,25 @@ public class CategoryModel {
 	private Integer id;
 	@Column(name="category_name",nullable = false)
 	@NotNull(message = "The category_name cannot be null")
-	@NotBlank
+	@NotBlank(message = "must not be empty")
 	private String name;
-	@Column(name = "is_deleted")
-	private boolean deleted;
-	@Column(name = "created_at", nullable = false)
+	@Column(name = "is_active")
+	@NotNull(message = "The is_active cannot be null")
+	private Boolean active;
+	@Column(name = "created_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime createdAt;
-	@Column(name = "updated_at", nullable = false)
+	@Column(name = "updated_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime updatedAt;
 	
 	public CategoryModel() {
 	}
 	public CategoryModel(Integer id,String name,
-			boolean deleted, LocalDateTime createdAt, LocalDateTime updatedAt) {
+			Boolean active, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		this.id = id;
 		this.name = name;
-		this.deleted = deleted;
+		this.active = active;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
@@ -55,8 +56,8 @@ public class CategoryModel {
 	public String getName() {
 		return name;
 	}
-	public boolean isDeleted() {
-		return deleted;
+	public boolean isActive() {
+		return active;
 	}
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
@@ -71,8 +72,8 @@ public class CategoryModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public void setDeleted(boolean deleted) {
-		this.deleted = deleted;
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
@@ -80,12 +81,13 @@ public class CategoryModel {
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
 	@Override
 	public String toString() {
-		return "CategoryModel [id=" + id + ", name=" + name + ", deleted=" + deleted + ", createdAt=" + createdAt
+		return "CategoryModel [id=" + id + ", name=" + name + ", active=" + active + ", createdAt=" + createdAt
 				+ ", updatedAt=" + updatedAt + "]";
 	}
+	
+	
 	
 	
 }

@@ -64,14 +64,11 @@ public class PurchaseOrderModel {
 	@JoinColumn(name="id_status",referencedColumnName = "id", nullable = false)
 	//@NotNull(message = "The id_supplier cannot be null")
 	private StatusModel status;
-	@OneToMany(mappedBy = "purchaseOrder")
-	@JsonManagedReference
-	//@NotNull(message = "The detailOc cannot be null")
-	private List<DetailOcModel> detailOc;
+	
 	public PurchaseOrderModel() {
 	}
 	public PurchaseOrderModel(Integer id, Integer number,LocalDateTime issueDate,LocalDateTime deliveryDate,Double total,boolean isDeleted, LocalDateTime createdAt,
-			LocalDateTime updatedAt,SupplierModel supplier,StatusModel status,List<DetailOcModel> detailOc) {
+			LocalDateTime updatedAt,SupplierModel supplier,StatusModel status) {
 		this.id = id;
 		this.number = number;
 		this.issueDate = issueDate;
@@ -82,7 +79,6 @@ public class PurchaseOrderModel {
 		this.updatedAt = updatedAt;
 		this.supplier = supplier;
 		this.status = status;
-		this.detailOc = detailOc;
 	}
 	public Integer getId() {
 		return id;
@@ -114,9 +110,7 @@ public class PurchaseOrderModel {
 	public StatusModel getStatus() {
 		return status;
 	}
-	public List<DetailOcModel> getDetailOc() {
-		return detailOc;
-	}
+	
 	public void setNumber(Integer number) {
 		this.number = number;
 	}
@@ -144,15 +138,12 @@ public class PurchaseOrderModel {
 	public void setStatus(StatusModel status) {
 		this.status = status;
 	}
-	public void setDetailOc(List<DetailOcModel> detailOc) {
-		this.detailOc = detailOc;
-	}
+	
 	@Override
 	public String toString() {
 		return "PurchaseOrderModel [id=" + id + ", number=" + number + ", issueDate=" + issueDate + ", deliveryDate="
 				+ deliveryDate + ", total=" + total + ", isDeleted=" + isDeleted + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + ", supplier=" + supplier + ", status=" + status + ", detailOc="
-				+ detailOc + "]";
+				+ ", updatedAt=" + updatedAt + ", supplier=" + supplier + ", status=" + status + "]";
 	}
 	
 	

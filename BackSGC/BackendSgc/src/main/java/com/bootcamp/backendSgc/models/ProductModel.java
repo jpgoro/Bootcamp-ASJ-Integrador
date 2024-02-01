@@ -71,13 +71,11 @@ public class ProductModel {
 	@JoinColumn(name="id_supplier",referencedColumnName = "id", nullable = false)
 	//@NotNull(message = "The id_category cannot be null")
 	private SupplierModel supplier;
-	@OneToMany(mappedBy = "product")
-	@JsonManagedReference
-	private List<DetailOcModel> detailOc;
+	
 	public ProductModel() {
 	}
 	public ProductModel(Integer id,String sku,String name,String description,Double price,String image, Boolean isDeleted,
-			LocalDateTime createdAt, LocalDateTime updatedAt,CategoryModel category,SupplierModel supplier, List<DetailOcModel> detailOc) {
+			LocalDateTime createdAt, LocalDateTime updatedAt,CategoryModel category,SupplierModel supplier) {
 		this.id = id;
 		this.sku = sku;
 		this.name = name;
@@ -89,7 +87,6 @@ public class ProductModel {
 		this.updatedAt = updatedAt;
 		this.category = category;
 		this.supplier = supplier;
-		this.detailOc = detailOc;
 	}
 	public Integer getId() {
 		return id;
@@ -124,9 +121,7 @@ public class ProductModel {
 	public SupplierModel getSupplier() {
 		return supplier;
 	}
-	public List<DetailOcModel> getDetailOc() {
-		return detailOc;
-	}
+	
 	public void setSku(String sku) {
 		this.sku = sku;
 	}
@@ -157,15 +152,12 @@ public class ProductModel {
 	public void setSupplier(SupplierModel supplier) {
 		this.supplier = supplier;
 	}
-	public void setDetailOc(List<DetailOcModel> detailOc) {
-		this.detailOc = detailOc;
-	}
+	
 	@Override
 	public String toString() {
 		return "ProductModel [id=" + id + ", sku=" + sku + ", name=" + name + ", description=" + description
 				+ ", price=" + price + ", image=" + image + ", isDeleted=" + isDeleted + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + ", category=" + category + ", supplier=" + supplier + ", detailOc="
-				+ detailOc + "]";
+				+ ", updatedAt=" + updatedAt + ", category=" + category + ", supplier=" + supplier + "]";
 	}
 	
 	

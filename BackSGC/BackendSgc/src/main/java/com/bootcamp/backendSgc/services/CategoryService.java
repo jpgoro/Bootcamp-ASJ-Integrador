@@ -23,11 +23,29 @@ public class CategoryService {
 		return categoryRepository.findById(id);
 	}
 	
-	public CategoryModel postCategory(CategoryModel category) {
+	public CategoryModel createCategory(CategoryModel category) {
 		category.setCreatedAt(LocalDateTime.now());
-		category.setDeleted(false);
 		 return categoryRepository.save(category);
 	}
 	
+	public CategoryModel updateCategory(Integer id, CategoryModel category) {
+		Optional<CategoryModel> opCategory = categoryRepository.findById(id);
+		if(opCategory.isPresent()) {
+			CategoryModel categoryAux = opCategory.get();
+			categoryAux.setName(category.getName());
+			return categoryRepository.save(categoryAux);
+		}
+		return null;
+	}
+	
+	public CategoryModel deleteCategory(Integer id) {
+		Optional<CategoryModel> opCategory = categoryRepository.findById(id);
+		if(opCategory.isPresent()) {
+			CategoryModel category = opCategory.get();
+			category.setActive(false);
+			return categoryRepository.save(category);
+		}
+		return null;
+	}
 	
 }
