@@ -17,6 +17,7 @@ import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,14 +33,17 @@ public class AddressModel {
 	@Column(nullable = false)
 	@NotNull(message = "The street cannot be null")
 	@NotBlank
+	@Size(max = 255, message = "Street must be less than {max} characters")
 	private String street;
 	@Column(nullable = false)
 	@NotNull(message = "The number cannot be null")
 	@Positive
+	@Size(max = 255, message = "Number must be less than {max} characters")
 	private Integer number;
 	@Column(name="postal_code", nullable = false)
 	@NotNull(message = "The postalCode cannot be null")
 	@NotBlank
+	@Size(max = 255, message = "Postal code must be less than {max} characters")
 	private String postalCode;
 	@Column(name = "created_at")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -50,22 +54,23 @@ public class AddressModel {
 	@ManyToOne
 	@JoinColumn(name = "id_ocality",referencedColumnName = "id", nullable = false)
 	//@NotNull(message = "The idLocality cannot be null")
-	private LocalityModel idLocality;
-	
+	private LocalityModel locality;
+	@ManyToOne
+    @JoinColumn(name = "id_supplier", referencedColumnName = "id")
+    private SupplierModel supplier;
 	public AddressModel() {
 	}
-	
-	public AddressModel(Integer id, String street,Integer number,String postalCode, LocalDateTime createdAt,
-			LocalDateTime updatedAt, LocalityModel idLocality) {
+	public AddressModel(Integer id,String street,Integer number,String postalCode,
+			LocalDateTime createdAt, LocalDateTime updatedAt, LocalityModel locality, SupplierModel supplier) {
 		this.id = id;
 		this.street = street;
 		this.number = number;
 		this.postalCode = postalCode;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.idLocality = idLocality;
+		this.locality = locality;
+		this.supplier = supplier;
 	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -84,10 +89,12 @@ public class AddressModel {
 	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
 	}
-	public LocalityModel getIdLocality() {
-		return idLocality;
+	public LocalityModel getLocality() {
+		return locality;
 	}
-	
+	public SupplierModel getSupplier() {
+		return supplier;
+	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -106,14 +113,17 @@ public class AddressModel {
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	public void setIdLocality(LocalityModel idLocality) {
-		this.idLocality = idLocality;
+	public void setLocality(LocalityModel locality) {
+		this.locality = locality;
 	}
-	
+	public void setSupplier(SupplierModel supplier) {
+		this.supplier = supplier;
+	}
 	@Override
 	public String toString() {
 		return "AddressModel [id=" + id + ", street=" + street + ", number=" + number + ", postalCode=" + postalCode
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", idLocality=" + idLocality + "]";
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", locality=" + locality + ", supplier="
+				+ supplier + "]";
 	}
 	
 	

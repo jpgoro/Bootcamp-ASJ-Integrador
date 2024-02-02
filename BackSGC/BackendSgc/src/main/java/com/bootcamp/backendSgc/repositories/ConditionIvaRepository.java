@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.bootcamp.backendSgc.models.ConditionIvaModel;
 
-public interface ConditionaIvaRepository extends JpaRepository<ConditionIvaModel, Integer> {
+public interface ConditionIvaRepository extends JpaRepository<ConditionIvaModel, Integer> {
 
 }

@@ -27,6 +27,18 @@ public class LocalityService {
         return localityRepository.findById(id);
     }
 	
+	public LocalityModel postLocation(LocalityModel locality) {
+    	if(validateLocalityInput(locality)) {
+    		ProvinceModel province = provinceService.getProvinceById(locality.getProvince().getId())
+    				.orElseThrow(() -> new EntityNotFoundException("Province not found"));
+    		
+    		locality.setProvince(province);
+    		
+    		return localityRepository.save(locality);
+    	}
+    	return null;
+    }
+	
 	 public LocalityModel updateLocality(Integer id, LocalityModel locality) {
 	        Optional<LocalityModel> optionalLocality = localityRepository.findById(id);
 
@@ -43,6 +55,10 @@ public class LocalityService {
 
 	        return null;
 	    }
+	 public void deleteLocality(Integer id) {
+	        localityRepository.deleteById(id);
+	    }
+	 
 	private boolean validateLocalityInput(LocalityModel locality) {
         String auxiliar = "^[0-9 A-Za-z]{3,50}$";
     	if(!locality.getLocalityName().matches(auxiliar)) {

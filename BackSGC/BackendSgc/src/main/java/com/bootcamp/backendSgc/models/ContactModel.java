@@ -41,6 +41,10 @@ public class ContactModel {
 	@NotBlank
 	@Email
 	private String email;
+	@NotNull(message = "Phone number is required")
+    @NotBlank(message = "Phone number must be complete")
+    @Column(name = "phone_number", nullable = false)
+    private String phoneNumber;
 	@Column(name="contact_role", nullable = false)
 	@NotNull(message = "The contact_role cannot be null")
 	@NotBlank
@@ -61,89 +65,139 @@ public class ContactModel {
 	public ContactModel() {
 	}
 
-	public ContactModel(Integer id, String name,String lastName,String email,String role,LocalDateTime createdAt,
-			LocalDateTime updatedAt,SupplierModel supplier) {
+	
+
+	public ContactModel(Integer id, String name,String lastName,String email,String phoneNumber,String role, LocalDateTime createdAt,
+			LocalDateTime updatedAt, SupplierModel supplier) {
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
+		this.phoneNumber = phoneNumber;
 		this.role = role;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.supplier = supplier;
 	}
 
+
+
 	public Integer getId() {
 		return id;
 	}
+
+
 
 	public String getName() {
 		return name;
 	}
 
+
+
 	public String getLastName() {
 		return lastName;
 	}
 
+
+
 	public String getEmail() {
 		return email;
 	}
+
+
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+
 
 	public String getRole() {
 		return role;
 	}
 
 
+
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 
+
+
 	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
 	}
+
+
+
 	public SupplierModel getSupplier() {
 		return supplier;
 	}
+
+
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+
 
 	public void setRole(String role) {
 		this.role = role;
 	}
 
 
+
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
 
+
+
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
+
+
 	public void setSupplier(SupplierModel supplier) {
 		this.supplier = supplier;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "ContactModel [id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email + ", role="
-				+ role + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", supplier=" + supplier + "]";
+		return "ContactModel [id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email
+				+ ", phoneNumber=" + phoneNumber + ", role=" + role + ", createdAt=" + createdAt + ", updatedAt="
+				+ updatedAt + ", supplier=" + supplier + "]";
 	}
 
-	
-	
+
+
 	
 }

@@ -21,33 +21,37 @@ public class ConditionIvaModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Column(name="conditionIva_name")
-	@NotNull(message = "The conditionIva_name cannot be null")
+	@Column(name="tax_condition",nullable = false)
+	@NotNull(message = "The tax_condition cannot be null")
 	@NotBlank
-	private String name;
+	private String taxCondition;
 	
 	public ConditionIvaModel() {}
-	public ConditionIvaModel(Integer id,String name) {
+
+	public ConditionIvaModel(Integer id,String taxCondition) {
 		this.id = id;
-		this.name = name;
+		this.taxCondition = taxCondition;
 	}
+
 	public Integer getId() {
 		return id;
 	}
-	public String getName() {
-		return name;
+
+	public String getTaxCondition() {
+		return taxCondition;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setTaxCondition(String taxCondition) {
+		this.taxCondition = taxCondition;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ConditionIvaModel [id=" + id + ", name=" + name + "]";
+		return "ConditionIvaModel [id=" + id + ", taxCondition=" + taxCondition + "]";
 	}
 	
 	
