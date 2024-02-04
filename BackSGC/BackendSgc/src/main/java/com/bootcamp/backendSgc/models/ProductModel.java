@@ -53,8 +53,8 @@ public class ProductModel {
 	@NotNull(message = "The product_image cannot be null")
 	@NotBlank
 	private String image;
-	@Column(name = "is_deleted")
-	private Boolean isDeleted;
+	@Column(name = "is_active")
+	private Boolean active;
 	@Column(name = "created_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime createdAt;
@@ -63,102 +63,125 @@ public class ProductModel {
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime updatedAt;
 	@ManyToOne
-	@JoinColumn(name="id_category",referencedColumnName = "id", nullable = false)
+	@JoinColumn(name="id_category",referencedColumnName = "id")
 	//@NotNull(message = "The id_category cannot be null")
 	private CategoryModel category;
 	@ManyToOne
-	@JsonBackReference
-	@JoinColumn(name="id_supplier",referencedColumnName = "id", nullable = false)
+	@JoinColumn(name="id_supplier",referencedColumnName = "id")
 	//@NotNull(message = "The id_category cannot be null")
 	private SupplierModel supplier;
 	
 	public ProductModel() {
 	}
-	public ProductModel(Integer id,String sku,String name,String description,Double price,String image, Boolean isDeleted,
-			LocalDateTime createdAt, LocalDateTime updatedAt,CategoryModel category,SupplierModel supplier) {
+
+	public ProductModel(Integer id,String sku,String name,String description,Double price,String image, Boolean active,
+			LocalDateTime createdAt, LocalDateTime updatedAt, CategoryModel category, SupplierModel supplier) {
 		this.id = id;
 		this.sku = sku;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.image = image;
-		this.isDeleted = isDeleted;
+		this.active = active;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.category = category;
 		this.supplier = supplier;
 	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public String getSku() {
 		return sku;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public Double getPrice() {
 		return price;
 	}
+
 	public String getImage() {
 		return image;
 	}
-	public Boolean getIsDeleted() {
-		return isDeleted;
+
+	public Boolean getActive() {
+		return active;
 	}
+
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
+
 	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
 	}
+
 	public CategoryModel getCategory() {
 		return category;
 	}
+
 	public SupplierModel getSupplier() {
 		return supplier;
 	}
-	
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public void setSku(String sku) {
 		this.sku = sku;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public void setIsDeleted(Boolean isDeleted) {
-		this.isDeleted = isDeleted;
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
+
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
+
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
 	public void setCategory(CategoryModel category) {
 		this.category = category;
 	}
+
 	public void setSupplier(SupplierModel supplier) {
 		this.supplier = supplier;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "ProductModel [id=" + id + ", sku=" + sku + ", name=" + name + ", description=" + description
-				+ ", price=" + price + ", image=" + image + ", isDeleted=" + isDeleted + ", createdAt=" + createdAt
+				+ ", price=" + price + ", image=" + image + ", active=" + active + ", createdAt=" + createdAt
 				+ ", updatedAt=" + updatedAt + ", category=" + category + ", supplier=" + supplier + "]";
 	}
-	
 	
 }

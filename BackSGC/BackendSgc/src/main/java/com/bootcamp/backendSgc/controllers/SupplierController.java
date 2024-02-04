@@ -31,7 +31,7 @@ public class SupplierController {
 	@Autowired
 	SupplierService supplierService;
 	
-	@GetMapping()
+	@GetMapping
     public ResponseEntity<?> getAllSuppliers() {
         try {
             List<SupplierModel> suppliers = supplierService.getSuppliers();
@@ -64,7 +64,7 @@ public class SupplierController {
     @GetMapping("/legalNameAsc")
     public ResponseEntity<?> getSuppliersByBusinessNameAsc() {
         try {
-            List<SupplierModel> suppliers = supplierService.getSuppliersByLegalNameAsc();
+            List<SupplierModel> suppliers = supplierService.getSuppliersByBusinessNameAsc();
             return new ResponseEntity<>(suppliers, HttpStatus.OK);
         } catch (Exception e) {
         	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: SuppliersByBusinessNameAsc NOT FETCHED");
@@ -74,7 +74,7 @@ public class SupplierController {
     @GetMapping("/legalnameDesc")
     public ResponseEntity<?> getSuppliersByBusinessNameDesc() {
         try {
-            List<SupplierModel> suppliers = supplierService.getSuppliersByLegalNameDesc();
+            List<SupplierModel> suppliers = supplierService.getSuppliersByBusinessNameDesc();
             return new ResponseEntity<>(suppliers, HttpStatus.OK);
         } catch (Exception e) {
         	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: SuppliersByBusinessNameDesc NOT FETCHED");
@@ -91,7 +91,7 @@ public class SupplierController {
         }
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<?> createSupplier(@Valid @RequestBody SupplierModel supplier, BindingResult bindingResult) {
         try {
             if (bindingResult.hasErrors()) {
@@ -100,7 +100,6 @@ public class SupplierController {
             }
 
             SupplierModel newSupplier = supplierService.postSupplier(supplier);
-            //me da un 201
             return new ResponseEntity<>(newSupplier, HttpStatus.CREATED); 
         } catch (EntityNotFoundException e) {
         	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

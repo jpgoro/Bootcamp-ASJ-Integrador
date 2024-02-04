@@ -46,12 +46,10 @@ public class DetailOcModel {
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime updatedAt;
 	@ManyToOne
-	@JsonBackReference
 	@JoinColumn(name="id_product",referencedColumnName = "id", nullable = false)
 	//@NotNull(message = "The product cannot be null")
 	private ProductModel product;
 	@ManyToOne
-	@JsonBackReference
 	@JoinColumn(name="id_purchaseOrder",referencedColumnName = "id", nullable = false)
 	//@NotNull(message = "The purchaseOrder cannot be null")
 	private PurchaseOrderModel purchaseOrder;

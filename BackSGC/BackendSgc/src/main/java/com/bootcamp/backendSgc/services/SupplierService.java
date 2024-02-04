@@ -41,21 +41,21 @@ public class SupplierService {
         return supplierRepository.findById(id);
     }
     
-    public List<SupplierModel> getSuppliersByLegalNameAsc() {
+    public List<SupplierModel> getSuppliersByBusinessNameAsc() {
         return supplierRepository.findAllByOrderByLegalNameAsc();
     }
     
-    public List<SupplierModel> getSuppliersByLegalNameDesc() {
+    public List<SupplierModel> getSuppliersByBusinessNameDesc() {
         return supplierRepository.findAllByOrderByLegalNameDesc();
     }
-    
-public SupplierModel postSupplier(SupplierModel supplier) {
+
+    public SupplierModel postSupplier(SupplierModel supplier) {
     	
     	List<SupplierModel> suppliers = getSuppliers();
     	
     	for (SupplierModel auxSupplier : suppliers) {
-			if(auxSupplier.getCode().equalsIgnoreCase(supplier.getCode())) {
-				throw new EntityNotFoundException("Code in use");
+			if(auxSupplier.getCode().equals(supplier.getCode())) {
+				throw new EntityNotFoundException("code is used");
 			}
 		}
     	
@@ -67,15 +67,17 @@ public SupplierModel postSupplier(SupplierModel supplier) {
             IndustryModel industry = industryService.getIndustryById(supplier.getIndustry().getId())
                     .orElseThrow(() -> new EntityNotFoundException("Industry not found"));
 
-            ConditionIvaModel conditionIva = conditionIvaService.getIvaConditionById(supplier.getConditionIva().getId())
-                    .orElseThrow(() -> new EntityNotFoundException("conditionIva not found"));
+            ConditionIvaModel ivaCondition = conditionIvaService.getIvaConditionById(supplier.getConditionIva().getId())
+                    .orElseThrow(() -> new EntityNotFoundException("IvaCondition not found"));
+
             supplier.setIndustry(industry);
-            supplier.setConditionIva(conditionIva);
+            supplier.setConditionIva(ivaCondition);
             
 
             return supplierRepository.save(supplier);
+    	} else {
+    		throw new EntityNotFoundException("The values are wrong");
     	}
-    	return null;
     }
 
     public SupplierModel deleteSupplier(Integer id) {
@@ -86,38 +88,51 @@ public SupplierModel postSupplier(SupplierModel supplier) {
             supplier.setActive(false);
             supplier.setUpdatedAt(LocalDateTime.now());
             return supplierRepository.save(supplier);
+        } else {
+        	throw new EntityNotFoundException("Supplier can't be deleted");
         }
 
-        return null;
     }
 
-    public SupplierModel putSupplier(Integer id, SupplierModel supplierMod) {
+    public SupplierModel putSupplier(Integer id, SupplierModel updatedSupplier) {
         Optional<SupplierModel> existingSupplierOptional = supplierRepository.findById(id);
-
-        if (existingSupplierOptional.isPresent() && validateSupplierInput(supplierMod)) {
-            SupplierModel supplier = existingSupplierOptional.get();
-
-            IndustryModel industry = industryService.getIndustryById(supplierMod.getIndustry().getId())
-                    .orElseThrow(() -> new EntityNotFoundException("Industry not found"));
-
-            ConditionIvaModel conditionIva = conditionIvaService.getIvaConditionById(supplierMod.getConditionIva().getId())
-                    .orElseThrow(() -> new EntityNotFoundException("ConditionIva not found"));
-
-            supplier.setCode(supplierMod.getCode());
-            supplier.setIndustry(industry);
-            supplier.setLegalName(supplierMod.getLegalName());
-            supplier.setEmail(supplierMod.getEmail());
-            supplier.setWeb(supplierMod.getWeb());
-            supplier.setTel(supplierMod.getTel());
-            supplier.setImage(supplierMod.getImage());
-            supplier.setConditionIva(conditionIva);
-
-            supplier.setUpdatedAt(LocalDateTime.now());
-
-            return supplierRepository.save(supplier);
+        
+        String initSupplierCode = existingSupplierOptional.get().getCode();
+        
+        if(!initSupplierCode.equals(updatedSupplier.getCode())) {
+        	List<SupplierModel> suppliers = getSuppliers();
+        	for (SupplierModel supplier2 : suppliers) {
+    			if(supplier2.getCode().equals(updatedSupplier.getCode())) {
+    				throw new EntityNotFoundException("The supplier code is used");
+    			}
+    		}
         }
 
-        return null;
+        if (existingSupplierOptional.isPresent() && validateSupplierInput(updatedSupplier)) {
+            SupplierModel existingSupplier = existingSupplierOptional.get();
+
+            IndustryModel industry = industryService.getIndustryById(updatedSupplier.getIndustry().getId())
+                    .orElseThrow(() -> new EntityNotFoundException("Industry not found")); // Handle properly
+
+            ConditionIvaModel conditionIva = conditionIvaService.getIvaConditionById(updatedSupplier.getConditionIva().getId())
+                    .orElseThrow(() -> new EntityNotFoundException("IvaCondition not found")); // Handle properly
+
+            existingSupplier.setCode(updatedSupplier.getCode());
+            existingSupplier.setIndustry(industry);
+            existingSupplier.setCuit(updatedSupplier.getCuit());
+            existingSupplier.setLegalName(updatedSupplier.getLegalName());
+            existingSupplier.setEmail(updatedSupplier.getEmail());
+            existingSupplier.setWeb(updatedSupplier.getWeb());
+            existingSupplier.setTel(updatedSupplier.getTel());
+            existingSupplier.setImage(updatedSupplier.getImage());
+            existingSupplier.setConditionIva(conditionIva);
+
+            existingSupplier.setUpdatedAt(LocalDateTime.now());
+
+            return supplierRepository.save(existingSupplier);
+        } else {
+        	throw new EntityNotFoundException("The values are wrong");
+        }
     }
 
     public SupplierModel undeleteSupplierById(Integer id) {
@@ -128,9 +143,9 @@ public SupplierModel postSupplier(SupplierModel supplier) {
             supplier.setActive(true);
             supplier.setUpdatedAt(LocalDateTime.now());
             return supplierRepository.save(supplier);
+        } else {
+        	throw new EntityNotFoundException("Supplier can't be undeleted");
         }
-
-        return null;
     }
     
     private boolean validateSupplierInput(SupplierModel supplier) {

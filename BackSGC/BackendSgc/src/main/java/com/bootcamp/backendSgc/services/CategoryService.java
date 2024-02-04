@@ -15,37 +15,41 @@ public class CategoryService {
 	@Autowired
 	CategoryRepository categoryRepository;
 	
-	public List<CategoryModel> getAllCategories(){
-		return categoryRepository.findAll();
-	}
-	
-	public Optional<CategoryModel> getCategoryById(Integer id) {
-		return categoryRepository.findById(id);
-	}
-	
-	public CategoryModel createCategory(CategoryModel category) {
-		category.setCreatedAt(LocalDateTime.now());
-		 return categoryRepository.save(category);
-	}
-	
-	public CategoryModel updateCategory(Integer id, CategoryModel category) {
-		Optional<CategoryModel> opCategory = categoryRepository.findById(id);
-		if(opCategory.isPresent()) {
-			CategoryModel categoryAux = opCategory.get();
-			categoryAux.setName(category.getName());
-			return categoryRepository.save(categoryAux);
-		}
-		return null;
-	}
-	
-	public CategoryModel deleteCategory(Integer id) {
-		Optional<CategoryModel> opCategory = categoryRepository.findById(id);
-		if(opCategory.isPresent()) {
-			CategoryModel category = opCategory.get();
-			category.setActive(false);
-			return categoryRepository.save(category);
-		}
-		return null;
-	}
-	
+	public List<CategoryModel> getCategories() {
+        return categoryRepository.findAll();
+    }
+
+    public Optional<CategoryModel> getCategoryById(Integer category) {
+        return categoryRepository.findById(category);
+    }
+
+    public CategoryModel createCategory(CategoryModel category) {
+        category.setCreatedAt(LocalDateTime.now());
+        return categoryRepository.save(category);
+    }
+    
+    public CategoryModel updateCategory(Integer id, CategoryModel modCategory) {
+    	Optional<CategoryModel> optionalCategory = categoryRepository.findById(id);
+    	
+    	if (optionalCategory.isPresent()) {
+            CategoryModel category = optionalCategory.get();
+            category.setName(modCategory.getName());
+            return categoryRepository.save(category);
+        }
+
+        return null;
+    }
+
+    public CategoryModel deleteCategory(Integer id) {
+        Optional<CategoryModel> optionalCategory = categoryRepository.findById(id);
+
+        if (optionalCategory.isPresent()) {
+            CategoryModel category = optionalCategory.get();
+            category.setActive(false);
+            return categoryRepository.save(category);
+        }
+
+        return null;
+    }
+
 }

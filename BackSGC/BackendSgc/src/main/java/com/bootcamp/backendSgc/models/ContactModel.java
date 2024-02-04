@@ -39,7 +39,7 @@ public class ContactModel {
 	@Column(name="contact_email", nullable = false)
 	@NotNull(message = "The contact_email cannot be null")
 	@NotBlank
-	@Email
+	@Email(message = "Email must be valid")
 	private String email;
 	@NotNull(message = "Phone number is required")
     @NotBlank(message = "Phone number must be complete")
@@ -58,7 +58,7 @@ public class ContactModel {
 	private LocalDateTime updatedAt;
 	
 	@OneToOne
-	@JoinColumn(name = "id_supplier",referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "id_supplier",referencedColumnName = "id")
 	//@NotNull(message = "The supplier cannot be null")
 	private SupplierModel supplier;
 	

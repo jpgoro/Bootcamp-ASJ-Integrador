@@ -38,7 +38,6 @@ public class AddressModel {
 	@Column(nullable = false)
 	@NotNull(message = "The number cannot be null")
 	@Positive
-	@Size(max = 255, message = "Number must be less than {max} characters")
 	private Integer number;
 	@Column(name="postal_code", nullable = false)
 	@NotNull(message = "The postalCode cannot be null")

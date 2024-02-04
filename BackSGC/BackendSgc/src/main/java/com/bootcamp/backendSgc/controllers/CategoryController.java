@@ -36,7 +36,7 @@ public class CategoryController {
 	@GetMapping
 	public ResponseEntity<List<CategoryModel>> getCategory() {
 		try {
-			return ResponseEntity.ok(categoryService.getAllCategories());
+			return ResponseEntity.ok(categoryService.getCategories());
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 			return ResponseEntity.internalServerError().build();
@@ -84,7 +84,7 @@ public class CategoryController {
 			CategoryModel updatedCategory = categoryService.updateCategory(id, category);
 			return ResponseEntity.status(HttpStatus.CREATED).body(updatedCategory);
 		} catch (EntityNotFoundException e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error : " + e.getMessage());
 		}
 	}
 

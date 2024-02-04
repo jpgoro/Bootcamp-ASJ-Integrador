@@ -30,7 +30,7 @@ public class StatusModel {
 	@Column(name="status_name", nullable = false)
 	@NotNull(message = "The status_name cannot be null")
 	@NotBlank
-	private String status_name;
+	private String statusName;
 	@Column(name = "created_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime createdAt;
@@ -38,24 +38,21 @@ public class StatusModel {
 	@Column(name = "updated_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime updatedAt;
-//	@OneToMany(mappedBy = "status")
-//	@JsonManagedReference
-//	private List<PurchaseOrderModel>purchaseOrd;
+
 	public StatusModel() {
 	}
-	public StatusModel(Integer id, String status_name,
+	public StatusModel(Integer id,String statusName,
 			LocalDateTime createdAt, LocalDateTime updatedAt) {
 		this.id = id;
-		this.status_name = status_name;
+		this.statusName = statusName;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		//this.purchaseOrd = purchaseOrd;
 	}
 	public Integer getId() {
 		return id;
 	}
-	public String getStatus_name() {
-		return status_name;
+	public String getStatusName() {
+		return statusName;
 	}
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
@@ -63,14 +60,11 @@ public class StatusModel {
 	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
 	}
-//	public List<PurchaseOrderModel> getPurchaseOrd() {
-//		return purchaseOrd;
-//	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public void setStatus_name(String status_name) {
-		this.status_name = status_name;
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
 	}
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
@@ -78,15 +72,11 @@ public class StatusModel {
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-//	public void setPurchaseOrd(List<PurchaseOrderModel> purchaseOrd) {
-//		this.purchaseOrd = purchaseOrd;
-//	}
 	@Override
 	public String toString() {
-		return "StatusModel [id=" + id + ", status_name=" + status_name + ", createdAt=" + createdAt + ", updatedAt="
+		return "StatusModel [id=" + id + ", statusName=" + statusName + ", createdAt=" + createdAt + ", updatedAt="
 				+ updatedAt + "]";
 	}
-	
 	
 	
 }
