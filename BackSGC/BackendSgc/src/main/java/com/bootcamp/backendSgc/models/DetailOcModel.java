@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -33,7 +34,7 @@ public class DetailOcModel {
 	private Integer id;
 	@Column(nullable = false)
 	@NotNull(message = "The quantity cannot be null")
-	@Positive
+	@Min(value = 0, message = "Quantity must be greater than or equal to zero")
 	private Integer quantity;
 	@Column(nullable = false)
 	@NotNull(message = "The price cannot be null")
