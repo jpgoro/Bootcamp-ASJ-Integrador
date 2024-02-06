@@ -24,7 +24,12 @@ public class LocalityService {
 		return localityRepository.findAll();
 	}
 	public Optional<LocalityModel> getLocalityById(Integer id) {
-        return localityRepository.findById(id);
+		Optional<LocalityModel> locality = localityRepository.findById(id);
+    	if(locality.isPresent()) {
+    		return locality;
+    	} else {
+    		throw new EntityNotFoundException("Locality  " + id + " was not found");
+    	}
     }
 	
 	public LocalityModel postLocation(LocalityModel locality) {
@@ -35,8 +40,9 @@ public class LocalityService {
     		locality.setProvince(province);
     		
     		return localityRepository.save(locality);
+    	} else {
+    		throw new EntityNotFoundException("Error: Locality don't created");
     	}
-    	return null;
     }
 	
 	 public LocalityModel updateLocality(Integer id, LocalityModel locality) {
@@ -51,9 +57,9 @@ public class LocalityService {
 	            auxLocality.setLocalityName(locality.getLocalityName());
 	            
 	            return localityRepository.save(auxLocality);
-	        }
-
-	        return null;
+	        }else {
+	    		throw new EntityNotFoundException("Error: locality don't updated");
+	    	}
 	    }
 	 public void deleteLocality(Integer id) {
 	        localityRepository.deleteById(id);

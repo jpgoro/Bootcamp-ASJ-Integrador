@@ -39,7 +39,12 @@ public class ProductService {
 	}
 	
 	public Optional<ProductModel> getProductById(Integer id){
-		return productRepository.findById(id);
+		Optional<ProductModel> product = productRepository.findById(id);
+		if(product.isPresent()) {
+			return product;
+		} else {
+			throw new EntityNotFoundException("Error: product " + id + " was not found");
+		}
 	}
 	
 	public List<ProductModel> getProductsByPriceAsc(){

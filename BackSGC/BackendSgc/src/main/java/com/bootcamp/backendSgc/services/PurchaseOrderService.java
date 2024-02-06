@@ -39,7 +39,12 @@ public class PurchaseOrderService {
 	    }
 
 	    public Optional<PurchaseOrderModel> getOrderById(Integer orderId) {
-	        return purchaseOrderRepository.findById(orderId);
+	    	Optional<PurchaseOrderModel> optionalPurchase = purchaseOrderRepository.findById(orderId);
+	    	if(optionalPurchase.isPresent()) {
+	    		return optionalPurchase;
+	    	} else {
+	    		throw new EntityNotFoundException("Error: purchase order " + orderId + " was not found");
+	    	}
 	    }
 
 		public List<PurchaseOrderModel> getOrdersByStatusId(Integer statusId) {

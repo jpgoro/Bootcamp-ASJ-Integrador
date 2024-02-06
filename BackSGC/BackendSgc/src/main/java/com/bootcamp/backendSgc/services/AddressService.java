@@ -30,7 +30,12 @@ public class AddressService {
     }
 
     public Optional<AddressModel> getAddressById(Integer id) {
-        return addressRepository.findById(id);
+    	Optional<AddressModel> address = addressRepository.findById(id);
+    	if(address.isPresent()) {
+    		return address;
+    	} else {
+    		throw new EntityNotFoundException("Address " + id + "was not found");
+    	}
     }
     
     public Optional<List<AddressModel>> getAddressBySupplierId(Integer supplierId) {
@@ -56,9 +61,9 @@ public class AddressService {
             address.setLocality(location);
 
             return addressRepository.save(address);
+    	}else {
+    		throw new EntityNotFoundException("Invalid values");
     	}
-    	
-    	return null;
     }
 
     public AddressModel putAddress(Integer id, AddressModel modAddress) {
@@ -82,9 +87,9 @@ public class AddressService {
             updateTimestamp(address);
 
             return addressRepository.save(address);
+        }else {
+        	throw new EntityNotFoundException("Invalid values");
         }
-
-        return null;
     }
 
     public void deleteAddress(Integer id) {

@@ -31,7 +31,18 @@ public class DetailOCService {
     }
 
     public Optional<DetailOcModel> getOrderDetailsById(Integer id) {
-        return detailOCRepository.findById(id);
+    	Optional<DetailOcModel> detailOc = detailOCRepository.findById(id);
+       	if(detailOc.isPresent()) {
+       		return detailOc;
+       	} else {
+       		throw new EntityNotFoundException("Error: Detail order " + id + " was not found");
+       	}
+    }
+    
+    public Optional<List<DetailOcModel>> getOrderDetailByOrderId(Integer orderId) {
+    	PurchaseOrderModel order = purchaseOrderService.getOrderById(orderId).orElseThrow(() ->
+        new EntityNotFoundException("Order with ID " + orderId + " not found"));
+    	return Optional.ofNullable(detailOCRepository.findByPurchaseOrder(order));
     }
 
     public List<DetailOcModel> createOrderDetails(List<DetailOcModel> orderDetailsList) {
@@ -55,6 +66,10 @@ public class DetailOCService {
 
         return savedOrderDetails;
     }
+    
+    public void deleteOrderDetails(Integer id) {
+    	detailOCRepository.deleteById(id);
+    }
 
 
 
@@ -72,11 +87,7 @@ public class DetailOCService {
 //    }
 
     
-    public Optional<List<DetailOcModel>> getOrderDetailByOrderId(Integer orderId) {
-    	PurchaseOrderModel order = purchaseOrderService.getOrderById(orderId).orElseThrow(() ->
-        new EntityNotFoundException("Order with ID " + orderId + " not found"));
-    	return Optional.ofNullable(detailOCRepository.findByPurchaseOrder(order));
-    }
+    
     
     private boolean validateOrderDetails(DetailOcModel orderDetails) {
     	
@@ -91,7 +102,5 @@ public class DetailOCService {
     }
 
 
-    public void deleteOrderDetails(Integer id) {
-    	detailOCRepository.deleteById(id);
-    }
+    
 }

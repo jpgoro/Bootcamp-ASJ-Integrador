@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.bootcamp.backendSgc.models.CountryModel;
 import com.bootcamp.backendSgc.repositories.CountryRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class CountryService {
 	@Autowired
@@ -20,7 +22,12 @@ public class CountryService {
 	}
 	
 	public Optional<CountryModel> getCountryById(Integer id){
-		return countryRepository.findById(id);
+		Optional<CountryModel> country = countryRepository.findById(id);
+    	if(country.isPresent()) {
+    		return country;
+    	} else {
+    		throw new EntityNotFoundException("Country " + id + " was not found");
+    	}
 	}
 	
 	public CountryModel createCountry(CountryModel country) {

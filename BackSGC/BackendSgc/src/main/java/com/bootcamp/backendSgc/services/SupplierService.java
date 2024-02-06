@@ -38,7 +38,12 @@ public class SupplierService {
     }
 
     public Optional<SupplierModel> getSupplierById(Integer id) {
-        return supplierRepository.findById(id);
+    	Optional<SupplierModel> optionalSupplier = supplierRepository.findById(id);
+    	if(optionalSupplier.isPresent()) {
+    		return optionalSupplier;
+    	} else {
+    		throw new EntityNotFoundException("Error: supplier " + id + " was not found");
+    	}
     }
     
     public List<SupplierModel> getSuppliersByBusinessNameAsc() {

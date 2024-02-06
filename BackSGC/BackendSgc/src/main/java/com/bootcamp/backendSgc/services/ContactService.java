@@ -27,7 +27,12 @@ public class ContactService {
     }
 
     public Optional<ContactModel> getContactById(Integer id) {
-        return contactRepository.findById(id);
+    	Optional<ContactModel> contact = contactRepository.findById(id);
+    	if(contact.isPresent()) {
+    		return contact; 
+    	} else {
+    		throw new EntityNotFoundException(" The ontact " + id + " was not found");
+    	}
     }
     
     public Optional<List<ContactModel>> getContactBySupplier(Integer idSupplier) {
@@ -50,9 +55,9 @@ public class ContactService {
             contact.setSupplier(supplier);
 
             return contactRepository.save(contact);
-        }
-
-        return null;
+        } else {
+    		throw new EntityNotFoundException("Error: contact dont created");
+    	}
     }
 
     public ContactModel updateContact(Integer id, ContactModel contact) {
@@ -74,9 +79,9 @@ public class ContactService {
             updateTimestamp(modContact);
 
             return contactRepository.save(modContact);
-        }
-
-        return null;
+        }else {
+    		throw new EntityNotFoundException("Contact " + id + " was not found");
+    	}
     }
 
     public void deleteContactById(Integer id) {
