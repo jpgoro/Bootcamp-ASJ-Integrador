@@ -5,6 +5,7 @@
         <tr>
           <th scope="col">Proveedor</th>
           <th scope="col">SKU</th>
+          <th scope="col">Estado</th>
           <th scope="col">Categoria</th>
           <th scope="col">Nombre</th>
           <th scope="col">Descripcion</th>
@@ -13,13 +14,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let product of productos">
-          <td>{{product.proveedor_razon}}</td>
+          <td>{{product.supplier.legalName}}</td>
           <td>{{ product.sku }}</td>
-          <td>{{ product.categoria }}</td>
-          <td>{{ product.nombreProducto }}</td>
-          <td>{{ product.descripcion }}</td>
-          <td>{{ product.precio }}</td>
-          <button type="button" class="btn btn-outline-warning btn-sm  me-4" (click)="editarProducto(product)">Modificar</button>
+          <td>{{ product.active }}</td>
+          <td>{{ product.category.name }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.price }}</td>
+          <button type="button" class="btn btn-outline-warning btn-sm  me-4" (click)="editarProducto(product.id)">Modificar</button>
           <button type="button" class="btn btn-outline-danger btn-sm " (click)="delete(product.id)">Eliminar</button>
 
         </tr>

@@ -20,10 +20,17 @@ const routes: Routes = [
 
   {
     path: 'producto',
-    children: [{ path: 'formAdd', component: FormProductoComponent },{ path: 'TablaForm', component: TarjProductoComponent },],
+    children: [{ path: 'formAdd', component: FormProductoComponent },
+    { path: 'formAdd/:id', component: FormProductoComponent },
+    { path: 'TablaForm', component: TarjProductoComponent },],
   },
 
-  { path: 'oc', children: [{ path: 'tabla', component: FormOcComponent },  { path: 'oc', component: TarjOcComponent },] },
+  {
+    path: 'orden',
+  children: [{ path: 'formAdd', component: FormOcComponent },
+  { path: 'formAdd/:id', component: FormProductoComponent },
+  { path: 'TablaForm', component: TarjOcComponent },]
+},
   {path: '**', pathMatch: 'full', redirectTo: ''},
 ];
 

@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { DetalleComponent } from './components/detalle/detalle.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DetallesComponent } from './components/producto/detalles/detalles.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     TarjProductoComponent,
     TarjOcComponent,
     HomeComponent,
-    DetalleComponent
+    DetalleComponent,
+    DetallesComponent
   ],
   imports: [
     BrowserModule,

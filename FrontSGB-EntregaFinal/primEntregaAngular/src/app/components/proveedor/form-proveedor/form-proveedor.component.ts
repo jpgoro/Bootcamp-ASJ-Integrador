@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SgcService } from '../../../services/sgc.service';
 import { NgForm } from '@angular/forms';
 import { Proveedor } from '../../../models/proveedor';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Industry } from '../../../models/industry';
 import { ConditionIva } from '../../../models/condition-iva';
 import { Supplier } from '../../../models/supplier';
@@ -18,7 +18,7 @@ import { Address } from '../../../models/address';
   styleUrl: './form-proveedor.component.css',
 })
 export class FormProveedorComponent implements OnInit {
-  constructor(public sgcService: SgcService, private router: Router) {}
+  constructor(public sgcService: SgcService, private router: Router,private route: ActivatedRoute,) {}
   industryViewModel: Industry =
   { id: 0,
   industryName: '', active: true };
@@ -88,6 +88,53 @@ export class FormProveedorComponent implements OnInit {
   this.sgcService.getAllIndustries().subscribe(res=>{
     this.rubros=res;
   })
+  this.route.paramMap.subscribe((response) => {
+    let id = response.get('id');
+if(id!==null ){
+  this.editMode = true;
+  this.sgcService.getSupplierById(Number(id)).subscribe(res=>{
+    this.supplierViewModel.id = res.id;
+    this.supplierViewModel.code = res.code;
+    this.supplierViewModel.legalName = res.legalName;
+    this.supplierViewModel.active = res.active;
+    this.supplierViewModel.cuit = res.cuit;
+    this.supplierViewModel.email = res.email;
+    this.supplierViewModel.image = res.image;
+    this.supplierViewModel.tel = res.tel;
+    this.supplierViewModel.web= res.web;
+    this.industryViewModel.id = res.industry.id;
+    this.industryViewModel.industryName = res.industry.industryName;
+    this.conditionIvaModel.id = res.conditionIva.id;
+    this.conditionIvaModel.taxCondition = res.conditionIva.taxCondition;
+    console.log(res.industry)
+  })
+  this.sgcService.getAddressBySupplierId(Number(id)).subscribe(res =>{
+    console.log(res);
+    this.addressViewModel.id = res[0].id;
+    this.addressViewModel.postalCode = res[0].postalCode;
+    this.addressViewModel.street = res[0].street;
+    this.addressViewModel.number = res[0].number;
+    this.localityViewModel.id = res[0].locality.id;
+    this.localityViewModel.localityName= res[0].locality.localityName;
+   this.provinceViewModel.id = res[0].locality.province.id;
+   this.provinceViewModel.name = res[0].locality.province.name;
+   this.countryViewModel.id = res[0].locality.province.country.id;
+   this.countryViewModel.name = res[0].locality.province.country.name;
+   this.selectCountry();
+  })
+  this.sgcService.getContactBySupplier(Number(id)).subscribe(res =>{
+    this.contactViewModel.id = res[0].id;
+    this.contactViewModel.name = res[0].name;
+    this.contactViewModel.lastName = res[0].lastName;
+    this.contactViewModel.email = res[0].email;
+    this.contactViewModel.phoneNumber = res[0].phoneNumber;
+    this.contactViewModel.role = res[0].role;
+
+  })
+
+
+}
+  });
   }
 
   selectCountry(){
@@ -96,8 +143,16 @@ export class FormProveedorComponent implements OnInit {
       this.provinces = res;
     })
   }
+
+
   createSupplier(form:NgForm){
     console.log(this.supplierViewModel)
+    if(this.editMode){
+      this.sgcService.putSupplier(this.supplierViewModel.id, this.supplierViewModel).subscribe(res =>{
+        this.sgcService.putAddress(this.addressViewModel.id, this.addressViewModel).subscribe();
+        this.sgcService.putContact(this.contactViewModel.id, this.contactViewModel).subscribe();
+      },err=>{console.log(err);});
+    }else{
       this.sgcService.postSupplier(this.supplierViewModel).subscribe(res=>{
         console.log(res);
         this.addressViewModel.supplier.id = res.id
@@ -119,8 +174,17 @@ export class FormProveedorComponent implements OnInit {
 
 
       });
+    }
 
   }
+
+
+
+
+
+
+
+
 
 
 

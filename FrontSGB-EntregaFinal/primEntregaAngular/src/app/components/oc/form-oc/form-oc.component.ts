@@ -6,6 +6,9 @@ import { SgcOcService } from '../../../services/sgc-oc.service';
 import { Proveedor } from '../../../models/proveedor';
 import { Producto } from '../../../models/producto';
 import { Router } from '@angular/router';
+import { PurchaseOrder } from '../../../models/purchase-order';
+import { Supplier } from '../../../models/supplier';
+import { Status } from '../../../models/status';
 
 
 @Component({
@@ -18,7 +21,18 @@ export class FormOcComponent implements OnInit {
   productos: Producto[] = [];
   productosFiltrados: Producto[] = [];
   constructor(public sgcProdService : SgcProdService, public sgcService : SgcService, public sgcOrdenService : SgcOcService, private router: Router){}
-
+  auxSupplier!:Supplier;
+  auxStatus!:Status;
+  auxOrdenCompra: PurchaseOrder = {
+    id: 0,
+    number: '',
+    issueDate: '',
+    deliveryDate: '',
+    active: true,
+    reception: '',
+    supplier: this.auxSupplier,
+    status: this.auxStatus,
+  }
 
   ngOnInit(): void {
     this.sgcService.getProveedores().subscribe((res)=>{
@@ -45,16 +59,7 @@ export class FormOcComponent implements OnInit {
   }
 
   onCantidadChange() {
-    /* // Actualizar el total al cambiar la cantidad
-    const cantidad = this.sgcOrdenService.datosOrden.cantidad;
-    const productoSeleccionado = this.productosFiltrados.find(
-      (producto) => producto.nombreProducto === this.sgcOrdenService.datosOrden.nombreProducto
-    );
-
-    if (productoSeleccionado) {
-      const precio = parseFloat(productoSeleccionado.precio);
-      this.sgcOrdenService.datosOrden.total = cantidad * precio;
-    } */
+    
     const cantidad =parseFloat(this.sgcOrdenService.datosOrden.cantidad);
   const productoSeleccionado = this.productosFiltrados.find(
     (producto) => producto.nombreProducto === this.sgcOrdenService.datosOrden.nombreProducto

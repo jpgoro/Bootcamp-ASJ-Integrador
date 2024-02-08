@@ -8,8 +8,6 @@ export interface PurchaseOrder {
     deliveryDate: string;
     active: boolean;
     reception: string;
-    createdAt?: string;
-    updatedAt?: string;
     supplier: Supplier;
     status: Status;
 }

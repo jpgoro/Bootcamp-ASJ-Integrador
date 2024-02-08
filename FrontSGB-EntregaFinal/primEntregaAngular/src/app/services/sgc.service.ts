@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, from, of } from 'rxjs';
+import { Observable, from, map, of } from 'rxjs';
 import { Proveedor}from '../models/proveedor'
 import { HttpClient } from '@angular/common/http';
 import { Country } from '../models/country';
@@ -42,6 +42,8 @@ export class SgcService {
     return this.http.get<Industry[]>(this.URL_API2);
   }
 
+
+
   //Provincia
   getProvincesByCountryId (id:number): Observable<Province[]> {
     console.log(id)
@@ -67,15 +69,29 @@ export class SgcService {
   putSupplier(id: number, supplier: Supplier): Observable<Supplier> {
     return this.http.put<Supplier>(`${this.URL_API3}/${id}`, supplier);
   }
+  getSupplierById(id: number): Observable<Supplier> {
+    return this.http.get<Supplier>(`${this.URL_API3}/${id}`);
+  }
 
   //addres
   public postAddress(address: Address): Observable<Address> {
     return this.http.post<Address>(this.URL_API4, address);
   }
+  public getAddressBySupplierId(id:number): Observable<Address[]> {
+    return this.http.get<Address[]>(`${this.URL_API4}/suppliers/${id}`);
+  }
+  public putAddress(id: number, updatedAddress: Address): Observable<Address> {
+    const url = `${this.URL_API4}/${id}`;
+    return this.http.put<Address>(url, updatedAddress);
+  }
 
   //contact
   public postContact(contact: Contact): Observable<Contact> {
     return this.http.post<Contact>(this.URL_API5, contact);
+  }
+  public getContactById(id: number): Observable<Contact> {
+    const url = `${this.URL_API5}/${id}`;
+    return this.http.get<Contact>(url);
   }
 
   public getAllContacts(): Observable<Contact[]> {
@@ -86,12 +102,18 @@ export class SgcService {
     const url = `${this.URL_API5}/suppliers/${id}`;
     return this.http.get<Contact[]>(url);
   }
+  public putContact(id: number, updatedContact: Contact): Observable<Contact> {
+    const url = `${this.URL_API5}/${id}`;
+    return this.http.put<Contact>(url, updatedContact);
+  }
 
   //locality
   public postLocality(locality: Locality): Observable<Locality> {
     return this.http.post<Locality>(this.URL_API6,locality);
   }
-
+  public putLocality(id: number,locality: Locality): Observable<Locality> {
+    return this.http.put<Locality>(this.URL_API6 + '/' + id,locality);
+  }
 
 
 

@@ -5,8 +5,6 @@ export interface DetailOrder {
   id: number;
     quantity: number;
     price: number;
-    createdAt?: string;
-    updatedAt?: string;
     product: Product;
     purchaseOrder: PurchaseOrder;
 }

@@ -9,8 +9,6 @@ export interface Product {
     price: number;
     image: string;
     active: boolean;
-    createdAt?: string;
-    updatedAt?: string;
     category: Category;
     supplier: Supplier;
 }

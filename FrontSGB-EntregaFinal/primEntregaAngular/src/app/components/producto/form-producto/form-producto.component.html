@@ -11,27 +11,25 @@
             <input type="hidden" name="idProv" [(ngModel)]="sgcProdService.datosProducto.proveedor_id">
             <input type="hidden" name="razon" [(ngModel)]="sgcProdService.datosProducto.proveedor_razon">
             <div class="mb-3">
+              <label for="disabledTextInput" class="form-label"
+                >SKU</label
+              >
+              <input type="text" id="sku" class="form-control" placeholder="" name="sku" [(ngModel)]="productViewModel.sku" />
+            </div>
+            <div class="mb-3">
               <label for="proveedor" class="form-label">ELIJA UN PROVEEDOR</label>
-              <select id="proveedor" class="form-select" name="proveedor_razon" [(ngModel)]="sgcProdService.datosProducto.proveedor_razon">
-                <option *ngFor="let proveedor of proveedores" [value]="proveedor.razon">{{ proveedor.razon }}</option>
+              <select id="proveedor" class="form-select" name="proveedor_razon" [(ngModel)]="productViewModel.supplier.id">
+                <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.legalName}}</option>
               </select>
             </div>
-            <div class="mb-3">
-              <label for="disabledTextInput" class="form-label"
-                >CODIGO / SKU</label
-              >
-              <input type="text" id="sku" class="form-control" placeholder="" name="sku" [(ngModel)]="sgcProdService.datosProducto.sku" />
-            </div>
+
+            <h4> aca va Proveedor</h4>
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label">CATEGORIA</label>
-              <select id="iva" class="form-select" name="categoria" [(ngModel)]="sgcProdService.datosProducto.categoria">
-                <option [value]="'alimentos'">Alimentos</option>
-                <option [value]="'electronica'">Electronica</option>
-                <option [value]="'automotriz'">Automotriz</option>
-                <option [value]="'laboratorio'">Laboratorio</option>
-                <option [value]="'salud'">Saludo</option>
-                <option [value]="'textil'">Textil</option>
-                <option [value]="'limpieza'">Limpieza</option>
+              <h4>for de categoria</h4>
+              <select  id="iva" class="form-select" name="categoria" [(ngModel)]="productViewModel.category.id">
+                <option  *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.name}}</option>
+
               </select>
             </div>
             <div class="mb-3">
@@ -44,7 +42,7 @@
                 class="form-control"
                 placeholder=""
                 name="nombreProducto"
-                [(ngModel)]="sgcProdService.datosProducto.nombreProducto"
+                [(ngModel)]="productViewModel.name"
               />
             </div>
             <div class="mb-3">
@@ -57,7 +55,20 @@
                 class="form-control"
                 placeholder=""
                 name="descripcion"
-                [(ngModel)]="sgcProdService.datosProducto.descripcion"
+                [(ngModel)]="productViewModel.description"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="disabledTextInput" class="form-label"
+                >IMAGEN</label
+              >
+              <input
+                type="text"
+                id="imagen"
+                class="form-control"
+                placeholder=""
+                name="imagen"
+                [(ngModel)]="productViewModel.image"
               />
             </div>
             <div class="mb-3">
@@ -68,7 +79,7 @@
                 class="form-control"
                 placeholder=""
                 name="precio"
-                [(ngModel)]="sgcProdService.datosProducto.precio"
+                [(ngModel)]="productViewModel.price"
               />
             </div>
 
