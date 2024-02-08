@@ -1,0 +1,295 @@
+
+<div class="container" style="background-color: #e2d5de">
+
+  <div class="row" id="contenidos">
+    <div class="col mt-5">
+      <form #miForm="ngForm" (ngSubmit)="createSupplier(miForm)" >
+        <fieldset>
+          <h3 class="mb-xl-5">Datos de Proveedor</h3>
+          <input type="hidden" name="id" >
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">CODIGO DE PROVEEDOR</label>
+            <input
+              type="text"
+              id="codigo"
+              class="form-control"
+              placeholder=""
+              name="codigo"
+              [(ngModel)]="supplierViewModel.code"
+              required
+              minlength="4"
+              #name="ngModel"
+            />
+            <div *ngIf="name.errors?.['minlength']" class="col-auto">
+              <span id="passwordHelpInline" class="form-text">
+                Minimo 4 caracteres
+              </span>
+            </div>
+
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label"
+              >RAZON SOCIAL</label
+            >
+            <input
+              type="text"
+              id="razon"
+              class="form-control"
+              placeholder=""
+              name="razon"
+              [(ngModel)]="supplierViewModel.legalName"
+              required
+            />
+          </div>
+          <label>RUBRO</label>
+            <select name="rubro" [(ngModel)]="industryViewModel.id">
+              <option *ngFor="let rubro of rubros" [value]="rubro.id">{{rubro.industryName}}</option>
+            </select>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">TELEFONO</label>
+            <input
+              type="text"
+              id="tel"
+              class="form-control"
+              placeholder=""
+              name="telefono"
+              [(ngModel)]="supplierViewModel.tel"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">EMAIL</label>
+            <input
+              type="email"
+              id="email7"
+              class="form-control"
+              placeholder=""
+              name="email7"
+              [(ngModel)]="supplierViewModel.email"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">SITIO WEB:</label>
+            <input
+              type="text"
+              id="url4"
+              class="form-control"
+              placeholder=""
+              name="url4"
+              [(ngModel)]="supplierViewModel.web"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">Imagen del proveedor:</label>
+            <input
+              type="text"
+              id="image"
+              class="form-control"
+              placeholder=""
+              name="image"
+              [(ngModel)]="supplierViewModel.image"
+              required
+            />
+          </div>
+          <H4>Direccion</H4>
+          <label>Paises</label>
+          <select name="country" [(ngModel)]="addressViewModel.locality.province.country.id" (change)="selectCountry()">
+            <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
+          </select>
+          <div>
+          <label>Provincias</label>
+          <select name="province" [(ngModel)]="addressViewModel.locality.province.id">
+            <option *ngFor="let province of provinces" [value]="province.id">{{province.name}}</option>
+          </select>
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label"
+              >Localidad</label
+            >
+            <input
+              type="text"
+              id="locality"
+              class="form-control"
+              placeholder=""
+              name="locality1"
+              [(ngModel)]="addressViewModel.locality.localityName"
+              required
+            />
+          </div>
+          <!-- <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">Pais</label>
+            <input
+              type="text"
+              id="direccion"
+              class="form-control"
+              placeholder=""
+              name="direccion"
+              [(ngModel)]="sgcService.datosProveedor.direccion"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">Provincia</label>
+            <input
+              type="text"
+              id="direccion"
+              class="form-control"
+              placeholder=""
+              name="direccion"
+              [(ngModel)]="sgcService.datosProveedor.direccion"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">Localidad</label>
+            <input
+              type="text"
+              id="direccion"
+              class="form-control"
+              placeholder=""
+              name="direccion"
+              [(ngModel)]="sgcService.datosProveedor.direccion"
+              required
+            />
+          </div> -->
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">Calle</label>
+            <input
+              type="text"
+              id="street"
+              class="form-control"
+              placeholder=""
+              name="street"
+              [(ngModel)]="addressViewModel.street"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">NUMERO DE CALLE</label>
+            <input
+              type="text"
+              id="number"
+              class="form-control"
+              placeholder=""
+              name="number3"
+              [(ngModel)]="addressViewModel.number"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">Codigo postal</label>
+            <input
+              type="text"
+              id="postal"
+              class="form-control"
+              placeholder=""
+              name="postal"
+              [(ngModel)]="addressViewModel.postalCode"
+              required
+            />
+            <h4>Datos Fiscales</h4>
+          </div>
+          <label>Condicion Iva</label>
+          <select name="iva" [(ngModel)]="conditionIvaModel.id">
+            <option *ngFor="let i of iva" [value]="i.id">{{i.taxCondition}}</option>
+          </select>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label"
+              >CUIT</label
+            >
+            <input
+              type="text"
+              id="cuit"
+              class="form-control"
+              placeholder=""
+              name="cuit"
+              [(ngModel)]="supplierViewModel.cuit"
+              required
+              #name="ngModel"
+            />
+            <div *ngIf="name.errors?.['maxLength']" class="col-auto">
+              <span id="passwordHelpInline" class="form-text">
+                Maximo 11caracteres
+              </span>
+            </div>
+
+          </div>
+
+          <h4>Datos de contacto</h4>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">Nombre</label>
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              placeholder=""
+              name="direction"
+              [(ngModel)]="contactViewModel.name"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">Apellido</label>
+            <input
+              type="text"
+              id="lastName"
+              class="form-control"
+              placeholder=""
+              name="lastName"
+              [(ngModel)]="contactViewModel.lastName"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">Telefono</label>
+            <input
+              type="text"
+              id="tel"
+              class="form-control"
+              placeholder=""
+              name="tel2"
+              [(ngModel)]="contactViewModel.phoneNumber"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">Email</label>
+            <input
+              type="text"
+              id="email"
+              class="form-control"
+              placeholder=""
+              name="email1"
+              [(ngModel)]="contactViewModel.email"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">Rol</label>
+            <input
+              type="text"
+              id="rol"
+              class="form-control"
+              placeholder=""
+              name="rol"
+              [(ngModel)]="contactViewModel.role"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary" id="guardar" [disabled]="!miForm.valid">
+            GUARDAR
+          </button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+

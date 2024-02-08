@@ -30,7 +30,7 @@ public class DetailOcController {
 	DetailOCService detailOCService;
 	
 	@GetMapping()
-    public ResponseEntity<?> getAllOrderDetails() {
+    public ResponseEntity<?> getAllDetailsOrders() {
         try {
             List<DetailOcModel> orderDetails = detailOCService.getOrderDetails();
             return ResponseEntity.ok(orderDetails);
@@ -40,7 +40,7 @@ public class DetailOcController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOrderDetailsById(@PathVariable Integer id) {
+    public ResponseEntity<?> getDetailsOrderById(@PathVariable Integer id) {
         try {
             Optional<DetailOcModel> orderDetail = detailOCService.getOrderDetailsById(id);
             return ResponseEntity.ok(orderDetail);
@@ -50,7 +50,7 @@ public class DetailOcController {
     }
 
     @GetMapping("/order/{orderId}")
-    public ResponseEntity<?> getOrderDetailByOrderId(@PathVariable Integer orderId) {
+    public ResponseEntity<?> getDetailOrderByOrderId(@PathVariable Integer orderId) {
         try {
             Optional<List<DetailOcModel>> orderDetails = detailOCService.getOrderDetailByOrderId(orderId);
             return ResponseEntity.ok(orderDetails);
@@ -60,7 +60,7 @@ public class DetailOcController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> createOrderDetails(@Valid @RequestBody List<DetailOcModel> orderDetails, BindingResult bindingResult) {
+    public ResponseEntity<?> postDetailOrder(@Valid @RequestBody List<DetailOcModel> orderDetails, BindingResult bindingResult) {
         try {
             if (bindingResult.hasErrors()) {
                 Map<String, String> errors = ErrorHandler.handleErrors(bindingResult);
@@ -94,7 +94,7 @@ public class DetailOcController {
 //    }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteOrderDetails(@PathVariable Integer id) {
+    public ResponseEntity<?> deleteDetailOrder(@PathVariable Integer id) {
         try {
             detailOCService.deleteOrderDetails(id);
             return ResponseEntity.ok().build();

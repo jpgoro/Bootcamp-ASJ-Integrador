@@ -16,6 +16,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { DetalleComponent } from './components/detalle/detalle.component';
+import { DetalleProveedorComponent } from './components/proveedor/detalle-proveedor/detalle-proveedor.component';
+import { DetalleOcComponent } from './components/oc/detalle-oc/detalle-oc.component';
+import { DetalleProductoComponent } from './components/producto/detalle-producto/detalle-producto.component';
+import { CountryService } from './services/country.service';
 
 
 @NgModule({
@@ -30,14 +34,17 @@ import { DetalleComponent } from './components/detalle/detalle.component';
     TarjProductoComponent,
     TarjOcComponent,
     HomeComponent,
-    DetalleComponent
+    DetalleComponent,
+    DetalleProveedorComponent,
+    DetalleOcComponent,
+    DetalleProductoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule, FormsModule, RouterModule
   ],
-  providers: [],
+  providers: [CountryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

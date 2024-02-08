@@ -1,0 +1,29 @@
+<div class="container-fluid">
+  <section >
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Código</th>
+          <th scope="col">Razón Social</th>
+          <th scope="col">Rubro</th>
+          <th scope="col">Email/ TEL/ URL</th>
+          <th scope="col">Datos de contacto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let proveedor of proveedores">
+          <td>{{ proveedor.code }}</td>
+          <td>{{ proveedor.legalName }}</td>
+          <td>{{ proveedor.industry.industryName }}</td>
+          <td>{{ proveedor.email }} | {{proveedor.tel}} | {{proveedor.web}}</td>
+          <!-- <td>{{ proveedor.contact[0].name}}</td> -->
+          <td>{{ proveedor.contact && proveedor.contact.length > 0 ? proveedor.contact[0].name : 'N/A' }}</td>
+
+          <button type="button" class="btn btn-outline-warning btn-sm  me-4"(click)="editarProveedor(proveedor)" >Modificar</button>
+          <button type="button" class="btn btn-outline-danger btn-sm " (click)="delete(proveedor.id)">Eliminar</button>
+
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>

@@ -86,7 +86,7 @@ public class IndustryController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateIndustry (@PathVariable Integer id, @Valid @RequestBody IndustryModel industry, BindingResult bindingResult) {
+    public ResponseEntity<?> putIndustry (@PathVariable Integer id, @Valid @RequestBody IndustryModel industry, BindingResult bindingResult) {
     	try {
             if (bindingResult.hasErrors()) {
                 Map<String, String> errors = ErrorHandler.handleErrors(bindingResult);

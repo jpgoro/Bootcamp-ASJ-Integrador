@@ -62,7 +62,7 @@ public class SupplierController {
     }
     
     @GetMapping("/legalNameAsc")
-    public ResponseEntity<?> getSuppliersByBusinessNameAsc() {
+    public ResponseEntity<?> getSuppliersByLegalNameAsc() {
         try {
             List<SupplierModel> suppliers = supplierService.getSuppliersByBusinessNameAsc();
             return new ResponseEntity<>(suppliers, HttpStatus.OK);
@@ -72,7 +72,7 @@ public class SupplierController {
     }
     
     @GetMapping("/legalnameDesc")
-    public ResponseEntity<?> getSuppliersByBusinessNameDesc() {
+    public ResponseEntity<?> getSuppliersByLegalNameDesc() {
         try {
             List<SupplierModel> suppliers = supplierService.getSuppliersByBusinessNameDesc();
             return new ResponseEntity<>(suppliers, HttpStatus.OK);
@@ -92,7 +92,7 @@ public class SupplierController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createSupplier(@Valid @RequestBody SupplierModel supplier, BindingResult bindingResult) {
+    public ResponseEntity<?> postSupplier(@Valid @RequestBody SupplierModel supplier, BindingResult bindingResult) {
         try {
             if (bindingResult.hasErrors()) {
                 Map<String, String> errors = ErrorHandler.handleErrors(bindingResult);
@@ -106,7 +106,7 @@ public class SupplierController {
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateSupplier(@PathVariable Integer id, @Valid @RequestBody SupplierModel supplier, BindingResult bindingResult) {
+    public ResponseEntity<?> putSupplier(@PathVariable Integer id, @Valid @RequestBody SupplierModel supplier, BindingResult bindingResult) {
         try {
             if (bindingResult.hasErrors()) {
                 Map<String, String> errors = ErrorHandler.handleErrors(bindingResult);
@@ -124,7 +124,7 @@ public class SupplierController {
         }
     }
     @PatchMapping("/{id}/undelete")
-    public ResponseEntity<?> undeleteSupplierById(@PathVariable Integer id) {
+    public ResponseEntity<?> patchSupplierById(@PathVariable Integer id) {
         try {
             SupplierModel supplier = supplierService.undeleteSupplierById(id);
             return new ResponseEntity<>(supplier, HttpStatus.OK);

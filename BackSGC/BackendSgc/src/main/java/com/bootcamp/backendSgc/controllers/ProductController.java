@@ -127,7 +127,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteProductById(@PathVariable Integer id) {
+    public ResponseEntity<?> deleteProduct(@PathVariable Integer id) {
         try {
             ProductModel deletedProduct = productService.deleteProduct(id);
             return ResponseEntity.ok(deletedProduct);
@@ -151,7 +151,7 @@ public class ProductController {
     }
 
     @PatchMapping("/{id}/undelete")
-    public ResponseEntity<?> undeleteProductById(@PathVariable Integer id) {
+    public ResponseEntity<?> patchProduct(@PathVariable Integer id) {
         try {
             ProductModel undeletedProduct = productService.undeleteProductById(id);
             return ResponseEntity.ok(undeletedProduct);

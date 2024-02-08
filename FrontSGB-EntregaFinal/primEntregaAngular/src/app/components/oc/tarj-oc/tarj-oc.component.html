@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <section>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">NUMERO DE ORDEN</th>
+            <th scope="col">ESTADO</th>
+            <th scope="col">FECHA DE EMISION</th>
+            <th scope="col">FECHA ENTREGA ESPERADA</th>
+            <th scope="col">DIRECCION RECEPCION</th>
+            <th scope="col">PROVEEDOR</th>
+            <th scope="col">PRODUCTO</th>
+            <th scope="col">CANTIDAD</th>
+            <th scope="col">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let orden of ordenes">
+            <td>{{ orden.numeroOrden }}</td>
+            <!-- <td >{{ orden.estado }}</td> -->
+            <td>{{ orden.cancelada ? 'CANCELADA' : 'Activa' }}</td>
+            <td>{{ orden.fechaEmision }}</td>
+            <td>{{ orden.fechaEntrega }}</td>
+            <td>{{ orden.direccion }}</td>
+            <td>{{ orden.proveedor_razon }}</td>
+            <td>{{ orden.nombreProducto }}</td>
+            <td>{{ orden.cantidad }}</td>
+            <td>{{ orden.total }}</td>
+            <!-- <button type="button" class="btn btn-outline-warning btn-sm  me-4">Cancelar</button>
+            <button type="button" class="btn btn-outline-warning btn-sm  me-4">Detalle</button> -->
+            <button *ngIf="!orden.cancelada" type="button" class="btn btn-outline-danger btn-sm me-4" (click)="cancelarOrden(orden.id)">
+              Cancelar
+            </button>
+            <button *ngIf="!orden.cancelada" type="button" class="btn btn-outline-primary btn-sm me-4">Detalle</button>
+
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+

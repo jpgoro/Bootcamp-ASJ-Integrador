@@ -31,7 +31,7 @@ public class StatusController {
 	StatusService statusService;
 	
 	@GetMapping()
-    public ResponseEntity<?> getStatuses() {
+    public ResponseEntity<?> getStatus() {
         try {
             List<StatusModel> statuses = statusService.getStatuses();
             return new ResponseEntity<>(statuses, HttpStatus.OK);

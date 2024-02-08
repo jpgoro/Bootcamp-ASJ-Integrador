@@ -95,7 +95,7 @@ public class PurchaseOrderController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteOrderById(@PathVariable Integer id) {
+    public ResponseEntity<?> deleteOrder(@PathVariable Integer id) {
         try {
             return ResponseEntity.ok(purchaseOrderService.desactivateOrderById(id));
         } catch (Exception e) {
@@ -117,7 +117,7 @@ public class PurchaseOrderController {
     }
 
     @PatchMapping("/{id}/undelete")
-    public ResponseEntity<?> undeleteOrderById(@PathVariable Integer id) {
+    public ResponseEntity<?> undeleteOrder(@PathVariable Integer id) {
         try {
             return ResponseEntity.ok(purchaseOrderService.undeleteOrderById(id));
         } catch (Exception e) {
