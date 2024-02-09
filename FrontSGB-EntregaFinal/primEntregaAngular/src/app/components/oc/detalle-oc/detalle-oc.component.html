@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <section>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">NUMERO DE ORDEN</th>
+          <th scope="col">ESTADO</th>
+          <th scope="col">FECHA DE EMISION</th>
+          <th scope="col">FECHA ENTREGA ESPERADA</th>
+          <th scope="col">DIRECCION RECEPCION</th>
+          <th scope="col">PROVEEDOR</th>
+          <th scope="col">TOTAL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr >
+          <td>{{ orden.number }}</td>
+          <td >{{ orden.status.statusName }}</td>
+          <!-- <td>{{ orden.active }}</td> -->
+          <td>{{ orden.issueDate }}</td>
+          <td>{{ orden.deliveryDate }}</td>
+          <td>{{ orden.reception}}</td>
+          <td>{{ orden.supplier.legalName }}</td>
+          <td>{{calcularTotal() | currency}}</td>
+
+
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">NOMBRE PRODUCTO</th>
+          <th scope="col">CANTIDAD</th>
+          <th scope="col">PRECIO</th>
+          <th scope="col">SUBTOTAL</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detail of arrayDetalles" >
+          <td>{{ detail.product.name }}</td>
+          <td >{{ detail.quantity }}</td>
+          <td>{{ detail.price }}</td>
+          <td>{{ detail.price * detail.quantity | currency }}</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
+
+

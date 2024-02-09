@@ -97,7 +97,7 @@ public class PurchaseOrderService {
 	        Optional<PurchaseOrderModel> optionalOrder = purchaseOrderRepository.findById(orderId);
 
 	        if (optionalOrder.isPresent()) {
-	        	StatusModel updatedStatus = statusService.getStatusById(2).orElseThrow(
+	        	StatusModel updatedStatus = statusService.getStatusById(3).orElseThrow(
 	             		() -> new EntityNotFoundException("Status not found with ID: " + 2));
 	        	PurchaseOrderModel orderToDeactivate = optionalOrder.get();
 	            orderToDeactivate.setStatus(updatedStatus);

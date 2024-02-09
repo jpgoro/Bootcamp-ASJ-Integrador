@@ -1,8 +1,30 @@
 <div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class=" mt-5 mb-5">
+        <div class="form-group">
+          <label for="opcionesSelect">Selecciona una opción:</label>
+          <select class="form-control" id="opcionesSelect">
+            <option value="opcion1">Opción 1</option>
+            <option value="opcion2">Opción 2</option>
+            <option value="opcion3">Opción 3</option>
+            <option value="opcion4">Opción 4</option>
+            <option value="opcion5">Opción 5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col 7"></div>
+    <div class="col-2">
+      <button type="button" class="btn btn-outline-success btn-sm me-4" routerLink="/producto/formAdd">Nuevo Producto</button>
+    </div>
+  </div>
+  <div class="class row">
   <section>
     <table class="table table-striped">
       <thead>
         <tr>
+          <th scope="col">Imagen</th>
           <th scope="col">Proveedor</th>
           <th scope="col">SKU</th>
           <th scope="col">Estado</th>
@@ -14,6 +36,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let product of productos">
+
+          <td><img src={{product.image}} alt="Imagen"></td>
           <td>{{product.supplier.legalName}}</td>
           <td>{{ product.sku }}</td>
           <td>{{ product.active }}</td>
@@ -23,10 +47,12 @@
           <td>{{ product.price }}</td>
           <button type="button" class="btn btn-outline-warning btn-sm  me-4" (click)="editarProducto(product.id)">Modificar</button>
           <button type="button" class="btn btn-outline-danger btn-sm " (click)="delete(product.id)">Eliminar</button>
+          <button type="button" class="btn btn-outline-primary btn-sm me-4" routerLink="/producto/detalle/{{product.id}}">Detalle</button>
 
         </tr>
       </tbody>
     </table>
   </section>
+</div>
 </div>
 

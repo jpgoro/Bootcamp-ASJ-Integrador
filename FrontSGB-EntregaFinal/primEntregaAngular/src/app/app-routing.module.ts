@@ -8,28 +8,35 @@ import { TarjProductoComponent } from './components/producto/tarj-producto/tarj-
 import { TarjProveedorComponent } from './components/proveedor/tarj-proveedor/tarj-proveedor.component';
 import { FormOcComponent } from './components/oc/form-oc/form-oc.component';
 import { TarjOcComponent } from './components/oc/tarj-oc/tarj-oc.component';
+import { HomeComponent } from './components/home/home.component';
+import { DetalleOcComponent } from './components/oc/detalle-oc/detalle-oc.component';
+import { DetalleComponent } from './components/proveedor/detalle/detalle.component';
+import { DetallesComponent } from './components/producto/detalles/detalles.component';
 
 const routes: Routes = [
-  { path: '', component: MainComponent },
+  { path: '', component: HomeComponent },
   {
     path: 'proveedor',
     children: [{ path: 'formAdd', component: FormProveedorComponent }
     ,{ path: 'formAdd/:id', component: FormProveedorComponent },
-    { path: 'TablaForm', component: TarjProveedorComponent }],
+    { path: 'TablaForm', component: TarjProveedorComponent },
+    { path: 'detalle/:id', component: DetalleComponent }],
   },
 
   {
     path: 'producto',
     children: [{ path: 'formAdd', component: FormProductoComponent },
     { path: 'formAdd/:id', component: FormProductoComponent },
-    { path: 'TablaForm', component: TarjProductoComponent },],
+    { path: 'TablaForm', component: TarjProductoComponent },
+    { path: 'detalle/:id', component: DetallesComponent }],
   },
 
   {
     path: 'orden',
   children: [{ path: 'formAdd', component: FormOcComponent },
   { path: 'formAdd/:id', component: FormProductoComponent },
-  { path: 'TablaForm', component: TarjOcComponent },]
+  { path: 'TablaForm', component: TarjOcComponent },
+  { path: 'detalle/:id', component: DetalleOcComponent },]
 },
   {path: '**', pathMatch: 'full', redirectTo: ''},
 ];

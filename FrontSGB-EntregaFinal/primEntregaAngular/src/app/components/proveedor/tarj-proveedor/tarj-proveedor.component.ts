@@ -18,6 +18,7 @@ export class TarjProveedorComponent implements OnInit{
 
   ngOnInit(): void {
     this.list();
+    
   }
 
   list(){
@@ -52,4 +53,7 @@ export class TarjProveedorComponent implements OnInit{
       })
     }
   }
+
+
+
 }

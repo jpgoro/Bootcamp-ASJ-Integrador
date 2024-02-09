@@ -1,0 +1,38 @@
+<div class="container fluid">
+  <section>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Logo</th>
+          <th scope="col">Razon social</th>
+          <th scope="col">email</th>
+          <th scope="col">Web</th>
+          <th scope="col">Web</th>
+          <th scope="col">Telefono</th>
+          <th scope="col">Activo</th>
+          <th scope="col">Cuit</th>
+          <th scope="col">Rubro</th>
+          <th scope="col">Iva</th>
+          <th scope="col">Contacto</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr >
+          <td><img src="{{supplierViewModel.image}}" alt="logo"></td>
+          <td>{{supplierViewModel.legalName}}</td>
+          <td>{{supplierViewModel.email}}</td>
+          <td>{{supplierViewModel.web}}</td>
+          <td>{{supplierViewModel.tel}}</td>
+          <td>{{supplierViewModel.active}}</td>
+          <td>{{supplierViewModel.cuit}}</td>
+          <td>{{supplierViewModel.industry.industryName}}</td>
+          <td>{{supplierViewModel.conditionIva.taxCondition}}</td>
+          <td>{{supplierViewModel.image}}</td>
+          <td>{{supplierViewModel.contact}}</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>

@@ -19,7 +19,7 @@ export class TarjProductoComponent implements OnInit {
   }
 
   list() {
-    this.sgcProdService.getProductsDeleted().subscribe((res) => {
+    this.sgcProdService.getProducts().subscribe((res) => {
       this.productos = res;
     });
   }
@@ -35,5 +35,9 @@ export class TarjProductoComponent implements OnInit {
         this.list();
       })
     }
+  }
+
+  verProducto(id:number){
+
   }
 }

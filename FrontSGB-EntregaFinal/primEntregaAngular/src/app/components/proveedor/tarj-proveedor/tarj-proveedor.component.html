@@ -1,8 +1,30 @@
 <div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class=" mt-5 mb-5">
+        <div class="form-group">
+          <label for="opcionesSelect">Selecciona una opción:</label>
+          <select class="form-control" id="opcionesSelect">
+            <option value="opcion1">Opción 1</option>
+            <option value="opcion2">Opción 2</option>
+            <option value="opcion3">Opción 3</option>
+            <option value="opcion4">Opción 4</option>
+            <option value="opcion5">Opción 5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col 7"></div>
+    <div class="col-2">
+      <button type="button" class="btn btn-outline-success btn-sm me-4" routerLink="/proveedor/formAdd" >Nuevo Proveedor</button>
+    </div>
+  </div>
+  <div class="row">
   <section >
     <table class="table table-striped">
       <thead>
         <tr>
+          <th scope="col">Logo</th>
           <th scope="col">Código</th>
           <th scope="col">Razón Social</th>
           <th scope="col">Rubro</th>
@@ -12,6 +34,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let proveedor of proveedores">
+          <td><img src="{{ proveedor.image }}" alt="logo"></td>
           <td>{{ proveedor.code }}</td>
           <td>{{ proveedor.legalName }}</td>
           <td>{{ proveedor.industry.industryName }}</td>
@@ -20,10 +43,12 @@
           <td>{{ proveedor.contact && proveedor.contact.length > 0 ? proveedor.contact[0].name : 'N/A' }}</td>
 
           <button type="button" class="btn btn-outline-warning btn-sm  me-4"(click)="editarProveedor(proveedor)" >Modificar</button>
-          <button type="button" class="btn btn-outline-danger btn-sm " (click)="delete(proveedor.id)">Eliminar</button>
+          <button type="button" class="btn btn-outline-danger btn-sm me-4" (click)="delete(proveedor.id)">Eliminar</button>
+          <button type="button" class="btn btn-outline-primary btn-sm me-4" routerLink="/proveedor/detalle/{{proveedor.id}}">Detalle</button>
 
         </tr>
       </tbody>
     </table>
   </section>
+</div>
 </div>

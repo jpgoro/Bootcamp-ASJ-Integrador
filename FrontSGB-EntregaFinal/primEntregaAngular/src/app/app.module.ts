@@ -18,6 +18,7 @@ import { HomeComponent } from './components/home/home.component';
 import { DetalleComponent } from './components/detalle/detalle.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DetallesComponent } from './components/producto/detalles/detalles.component';
+import { DetalleOcComponent } from './components/oc/detalle-oc/detalle-oc.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { DetallesComponent } from './components/producto/detalles/detalles.compo
     TarjOcComponent,
     HomeComponent,
     DetalleComponent,
-    DetallesComponent
+    DetallesComponent,
+    DetalleOcComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,25 @@
 <div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class=" mt-5 mb-5">
+        <div class="form-group">
+          <label for="opcionesSelect">Selecciona una opción:</label>
+          <select class="form-control" id="opcionesSelect">
+            <option value="opcion1">Opción 1</option>
+            <option value="opcion2">Opción 2</option>
+            <option value="opcion3">Opción 3</option>
+            <option value="opcion4">Opción 4</option>
+            <option value="opcion5">Opción 5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col 7"></div>
+    <div class="col-2">
+      <button type="button" class="btn btn-outline-success btn-sm me-4" routerLink="/orden/formAdd" >Nueva Orden</button>
+    </div>
+  </div>
+  <div class="class row">
     <section>
       <table class="table table-striped">
         <thead>
@@ -9,33 +30,30 @@
             <th scope="col">FECHA ENTREGA ESPERADA</th>
             <th scope="col">DIRECCION RECEPCION</th>
             <th scope="col">PROVEEDOR</th>
-            <th scope="col">PRODUCTO</th>
-            <th scope="col">CANTIDAD</th>
             <th scope="col">TOTAL</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let orden of ordenes">
-            <td>{{ orden.numeroOrden }}</td>
-            <!-- <td >{{ orden.estado }}</td> -->
-            <td>{{ orden.cancelada ? 'CANCELADA' : 'Activa' }}</td>
-            <td>{{ orden.fechaEmision }}</td>
-            <td>{{ orden.fechaEntrega }}</td>
-            <td>{{ orden.direccion }}</td>
-            <td>{{ orden.proveedor_razon }}</td>
-            <td>{{ orden.nombreProducto }}</td>
-            <td>{{ orden.cantidad }}</td>
-            <td>{{ orden.total }}</td>
+            <td>{{ orden.number }}</td>
+            <td >{{ orden.status.statusName }}</td>
+            <!-- <td>{{ orden.active }}</td> -->
+            <td>{{ orden.issueDate }}</td>
+            <td>{{ orden.deliveryDate }}</td>
+            <td>{{ orden.reception}}</td>
+            <td>{{ orden.supplier.legalName }}</td>
+            <td>Total</td>
             <!-- <button type="button" class="btn btn-outline-warning btn-sm  me-4">Cancelar</button>
             <button type="button" class="btn btn-outline-warning btn-sm  me-4">Detalle</button> -->
-            <button *ngIf="!orden.cancelada" type="button" class="btn btn-outline-danger btn-sm me-4" (click)="cancelarOrden(orden.id)">
+            <button *ngIf="orden.status.statusName!=='Cancelada'" type="button" class="btn btn-outline-danger btn-sm me-4" (click)="cancelarOrden(orden.id!)">
               Cancelar
             </button>
-            <button *ngIf="!orden.cancelada" type="button" class="btn btn-outline-primary btn-sm me-4">Detalle</button>
+            <button  type="button" class="btn btn-outline-primary btn-sm me-4" (click)="verOrden(orden.id!)">Detalle</button>
 
           </tr>
         </tbody>
       </table>
     </section>
+  </div>
   </div>
 
