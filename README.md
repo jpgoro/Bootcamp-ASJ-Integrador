@@ -3,7 +3,7 @@
 Desarrollo de un *Sistema de Gestión Compras* para manejar información de Proveedores, Productos y Órdenes de compra.
 
 
-
+# IMPORTANTE: Base de datos H2
 
 ## Ejecutar localmente
 
