@@ -1,4 +1,4 @@
-<div class="container " style="background-color: #e2d5de;">
+<!-- <div class="container " style="background-color: #e2d5de;">
 
   <div class="row" id="contenidos">
     <div class="col mt-5">
@@ -56,6 +56,12 @@
                 required/>
             </div>
             <div class="mb-3">
+              <label for="status" class="form-label">ELIJA UN ESTADO</label>
+              <select id="status" class="form-select" name="status" [(ngModel)]="sgcOrdenService.datosOrden.proveedor_razon"  (change)="onProveedorChange()">
+                <option *ngFor="let proveedor of proveedores" [value]="proveedor.razon">{{ proveedor.razon }}</option>
+              </select>
+            </div>
+            <div class="mb-3">
               <label for="proveedor2" class="form-label">ELIJA UN PROVEEDOR</label>
               <select id="proveedor" class="form-select" name="proveedor_razon" [(ngModel)]="sgcOrdenService.datosOrden.proveedor_razon"  (change)="onProveedorChange()">
                 <option *ngFor="let proveedor of proveedores" [value]="proveedor.razon">{{ proveedor.razon }}</option>
@@ -98,4 +104,137 @@
         </form>
       </div>
     </div>
-</div>
+</div> -->
+
+
+
+<!-- --------------------------------------------------------------- -->
+
+<div class="container" style="width: 100vw">
+  <div class="row" >
+    <div class="col-6 mb-5">
+      <h2>Orden de Compra</h2>
+
+      <form #miForm1="ngForm"  (ngSubmit)="createOrden(miForm1)">
+        <legend class="mb-xl-5">CARGUE LA ORDEN</legend>
+        <div class="mb-3">
+          <label for="disabledTextInput" class="form-label">NUMERO DE ORDEN</label>
+          <input
+            type="text"
+            id="numero"
+            class="form-control"
+            placeholder=""
+            name="numeroOrden"
+            [(ngModel)]="auxOrdenCompra.number"
+            required/>
+        </div>
+        <div class="mb-3">
+          <label for="disabledTextInput" class="form-label">FECHA DE EMISION</label>
+          <input
+            type="date"
+            id="emision"
+            class="form-control"
+            placeholder=""
+            name="fechaEmision"
+            [(ngModel)]="auxOrdenCompra.issueDate"
+            required/>
+        </div>
+        <div class="mb-3">
+          <label for="disabledTextInput" class="form-label"
+            >FECHA ENTREGA ESPERADA</label
+          >
+          <input
+            type="date"
+            id="entrega"
+            class="form-control"
+            placeholder=""
+            name="fechaEntrega"
+            [(ngModel)]="auxOrdenCompra.deliveryDate"
+            required
+            />
+        </div>
+        <div class="mb-3">
+          <label for="disabledTextInput" class="form-label"
+            >INFO RECEPCION</label
+          >
+          <input
+            type="text"
+            id="recepcion"
+            class="form-control"
+            placeholder=""
+            name="reception"
+            [(ngModel)]="auxOrdenCompra.reception"
+            required/>
+          </div>
+          <div class="mb-3">
+            <label for="proveedor2" class="form-label">ELIJA UN PROVEEDOR</label>
+            <select id="proveedor" class="form-select" #cod="ngModel" name="proveedor_razon" [(ngModel)]="auxOrdenCompra.supplier" (change)="onProveedorChange(cod.value)" >
+              <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.legalName }}</option>
+            </select>
+          </div>
+        <div class="mb-3">
+          <label for="status" class="form-label">ELIJA UN ESTADO</label>
+          <select id="status" class="form-select" name="status" [(ngModel)]="auxOrdenCompra.status"  >
+            <option *ngFor="let estado of estados" [value]="estado.id">{{ estado.statusName }}</option>
+          </select>
+          </div>
+          <button type="submit" class="btn btn-primary" id="guardar" [disabled]="!miForm1.valid || detalles.length<1" >
+            GUARDAR
+          </button>
+          </form>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <h2>Detalle de orden</h2>
+      <form #miForm2="ngForm" >
+        <fieldset>
+          <legend class="mb-xl-5">CARGUE EL DETALLE</legend>
+
+            <div class="mb-3">
+              <label for="disabledTextInput" class="form-label"
+                >Elija Producto</label>
+              <select id="producto" class="form-select" #auxProd="ngModel" name="nombreProducto" [(ngModel)]="auxDetailOrder.product">
+                <option *ngFor="let producto of productosFiltrados" [value]="producto.id">{{ producto.name }}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="cantidad" class="form-label"
+                >CANTIDAD</label
+              >
+              <input
+                type="number"
+                id="cantidad"
+                class="form-control"
+                placeholder=""
+                name="cantidad"
+                [(ngModel)]="auxDetailOrder.quantity"   required/>
+            </div>
+            <div class="mb-3">
+              <label for="disabledTextInput" class="form-label">TOTAL</label>
+              <input
+                type="text"
+                id="total"
+                class="form-control"
+                placeholder=""
+                name="total"
+                [(ngModel)]="auxDetailOrder.price" required/>
+            </div>
+
+            <button type="button" class="btn btn-primary" id="guardar" [disabled]="!miForm2.valid" (click)="cargarArray(auxProd.value)">
+              GUARDAR
+            </button>
+          </fieldset>
+        </form>
+    </div>
+  </div>
+
+
+<!-- <div class="container " style="background-color: #e2d5de;">
+
+  <div class="row" id="contenidos">
+    <div class="col mt-5">
+
+      </div>
+    </div>
+</div> -->
